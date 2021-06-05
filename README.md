@@ -1,5 +1,5 @@
-# README
-
+# <프로젝트>
+~하는 프로젝트 입니다.
 # 참여 학생
 ## 코딩
 ### Data
@@ -19,3 +19,13 @@
 - 20701 강주현
 - 20908 김상환
 - 10516 이선영
+# 사용한 것들
+## Data
+- Python 
+- Sqlite3(Library)
+## Backend
+- Python
+- Flask(Library)
+## Frontend
+- Javascript
+## Design
