@@ -1,7 +1,9 @@
 # 방탈출
 학교 축제에 전시하기 위해 만든 작품입니다.
 # 참여 학생
-## 코딩
+## Mgmt
+- [20827 조다니엘](https://github.com/arduinocc04)
+## Coding
 ### Data
 - [20827 조다니엘](https://github.com/arduinocc04)
 - 10507 남예원
@@ -16,12 +18,12 @@
 - 20825 임지수
 - [20920 양채연](https://github.com/ycy12310)
 - 10408 김주현
-## 디자인
+## Design
 - [20827 조다니엘](https://github.com/arduinocc04)
 - 20701 강주현
 - 20908 김상환
 - 10516 이선영
-# 사용한 것들
+# Used
 ## Data
 - Python 
 - Sqlite3(Library)
