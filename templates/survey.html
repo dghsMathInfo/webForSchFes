@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<head>
+    <title>설문조사</title>
+</head>
+<body>
+    <form action="/back_survey" method="POST">
+        <input name="roomId" value="{{roomId}}">
+        <p>mbti?</p>
+        <input name="mbti">
+        <p>최근 푼 수학 문제 수?</p>
+        <input name="recentMathPCnt" type="number">
+        <p>수학 얼마나 좋아하는지?</p>
+        <input name="rateOfLikingMath" type="number">
+        <p>가장 좋아하는 수학 분야?</p>
+        <input name="mostLikeMathField">
+        <input type="submit" value="저장">
+    </form>
+</body>

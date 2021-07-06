@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+    <title>회원 가입</title>
+    <script text="text/javascript">
+        window.onload = function() {
+            if(document.getElementById('failed').value == 'True') alert("닉네임이 중복되었습니다!");
+        }
+    </script>
+</head>
+<body>
+    <input id="failed" type="hidden" value="{{failed}}">
+    <form action="/back_signupName" method="POST">
+        <p>Id</p>
+        <input name="name">
+        <br>
+        <input type="submit" value="다음">
+    </form>
+</body>

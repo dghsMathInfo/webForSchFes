@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <title>고등수학</title>
+    <script text="text/javascript">
+        function hintClick(name) {
+            hints = ['h1', 'h2'];
+            alert(hints[parseInt(name[name.length -1])-1]);
+        }
+        function proClick(name) {
+            pros = ['p1', 'p2'];
+            alert(pros[parseInt(name[name.length -1])-1]);
+        }
+    </script>
+</head>
+<body>
+    <input type="hidden" id="roomId" value="{{pid}}">
+    <button id="hint1" onclick='hintClick("hint1");'>힌트1</button>
+    <button id="hint2" onclick='hintClick("hint2");'>힌트2</button>
+    <button id="pro1" onclick='proClick("pro1");'>문제1</button>
+    <button id="pro2" onclick='proClick("pro2");'>문제2</button>
+</body>
