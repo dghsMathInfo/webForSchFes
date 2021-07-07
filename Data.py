@@ -95,6 +95,11 @@ class Room:
         self.c.execute(query)
         self.conn.commit()
 
+    def updateRec(self, pid:int, rateOfRecommendation:int, recommended:int) -> None:
+        query = f'UPDATE Room_{self.roomId} SET rateOfRecommendation = {rateOfRecommendation}, recommended = {recommended} WHERE pid = {pid}'
+        self.c.execute(query)
+        self.conn.commit()
+
     def getNextPid(self) -> int:
         query = f'SELECT seq FROM sqlite_sequence WHERE name = "Room_{self.roomId}"'
         self.c.execute(query)

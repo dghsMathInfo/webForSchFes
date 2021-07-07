@@ -55,6 +55,10 @@ def back_login():
     else:
         return redirect(url_for('login'))
 
+@app.route('/back_logout')
+def back_logout():
+    del session['name']
+    return redirect(url_for('home'))
 
 @app.route('/')
 def home():
@@ -68,20 +72,31 @@ def room(roomId):
 
     roomDb = Data.Room(roomId)
     pid = roomDb.getNextPid()
+    #session['roomId'] = roomId
+    #session['pid'] = pid
     roomDb.uploadPlay(session['name'], int(time.time()))
-    return render_template(f'room{roomId}.html', pid = pid)
+    return render_template(f'room{roomId}.html', pid = pid, roomId = roomId)
 
-@app.route('/back_roomSend')
+@app.route('/back_roomSend', methods=['POST'])
 def back_roomSend():
-    pass # TODO
+    roomId = request.form['roomId']
+    pid = request.form['pid']
+    finishedTime = request.form['finishedTime']
+    device = request.form['device']
+    rights = request.form['rights']
+    wrongs = request.form['wrongs']
+    rateOfRecommendation = -1
+    recommended = -1
+    roomDb = Data.Room(roomId)
+    roomDb.updatePlay(pid, finishedTime, device, rights, wrongs, rateOfRecommendation, recommended)
+    return redirect(url_for('congratulations', roomId=roomId, pid=pid))
 
 @app.route('/leaderboard/<roomId>')
 def leaderboard(roomId):
-    return '게임 끝나고 순위 보는 페이지'
-
-@app.route('/sendinfo')
-def sendinfo():
-    return 'key, grade 같은 값들 보내는 페이지'
+    roomDb = Data.Room(roomId)
+    #tmp = roomDb.getNSFRForAll()
+    tmp = [[i]*3 for i in range(10)]
+    return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
 
 @app.route('/survey')
 def survey():
@@ -102,8 +117,19 @@ def back_survey():
 
 @app.route('/congratulations')
 def congratulations():
-    roomId = request.args.get('roomId')
-    return roomId
+    roomId = int(request.args.get('roomId'))
+    pid = int(request.args.get('pid'))
+    return render_template('congratulations.html', roomId=roomId, pid=pid)
+
+@app.route('/back_congratulations', methods=['POST'])
+def back_congratulations():
+    roomId = request.form['roomId']
+    pid = request.form['pid']
+    rateOfRecommendation = request.form['rateOfRecommendation']
+    recommended = request.form['recommended']
+    roomDb = Data.Room(roomId)
+    roomDb.updateRec(pid, rateOfRecommendation, recommended)
+    return redirect(url_for(leaderboard))
 
 if __name__ == '__main__':
     app.run(debug=True)
