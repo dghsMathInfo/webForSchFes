@@ -3,7 +3,7 @@
 |라벨|타입|자동 입력|비고|
 |---|---|---|---|
 |name|str|X|primary_key, 사용자를 구분하는 역할 함|
-|grade|int|X|학년|
+|studentId|int|X|학번|
 |mbti|str|X|-|
 |recentMathPCnt|int|X|최근 일주일간 푼 수학문제량|
 |rateOfLikingMath|int|X|평소 수학을 얼마나 좋아하는지|
@@ -25,7 +25,7 @@
 ```
 CREATE TABLE "User" (
 	"name"	TEXT,
-	"grade"	INTEGER NOT NULL,
+	"studentId"	INTEGER NOT NULL,
 	"mbti"	TEXT NOT NULL,
 	"recentMathPCnt"	INTEGER NOT NULL,
 	"rateOfLikingMath"	INTEGER NOT NULL,

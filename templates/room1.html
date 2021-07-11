@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<head>
+    <title>고등수학</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script type="text/javascript" src="{{url_for('static', filename='room1.js')}}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript">
+        function initLevel1_cli() {
+            var canvas = document.getElementById('mainCanvas');
+            var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
+            var canvasTop = canvas.offsetTop + canvas.clientTop;
+            var ctx = canvas.getContext('2d');
+            var img = new Image();
+            img.src = "{{url_for('static', filename='invitation.png')}}";
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
+                ctx.rect(100, 100, 100, 100);
+                ctx.fillStyle = "red";
+                ctx.fill();
+                ctx.rect(400, 400, 100, 100);
+                ctx.fillStyle = "blue";
+                ctx.fill();
+            }
+            canvas.addEventListener('click', function(event) {
+                var x = event.pageX - canvasLeft;
+                var y = event.pageY - canvasTop;
+                if(100<= x && x <= 200 && 100 <= y && y <= 200) {
+                    showQuestionModal();
+                }
+                if(400<= x && x <= 500 && 400 <= y && y <= 500) {
+                    showHintModal();
+                }
+            })
+            initLevel1();
+        }
+        window.onload = function() {
+            init();
+            initLevel1_cli();
+        }
+    </script>
+</head>
+<body>
+    <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="questionModal" style="display: none;">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="hideQuestionModal();"></div>
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <h3 class="text-5xl leading-6 font-medium text-gray-900" id="questionModalTitle">
+                    Problem 1
+                  </h3>
+                  <div class="mt-2 text-2xl text-gray-500" id="questionModalContent">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <div class="grid-cols-2 w-full">
+                  <div class="row-span-2">
+                      <label class="text-xl text-gray-500">답</label>
+                      <input id="answer" class="w-full justify-center rounded-md shadow-sm ring-2">
+                  </div>
+                  <div class="row-span-2 justify-end">
+                      <button type="button" class="w-full inline-flex justify-end rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 sm:ml-3 sm:w-auto sm:text-sm">
+                        답안 입력
+                      </button>
+                      <button type="button" class="mt-3 w-full inline-flex justify-end rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="hideQuestionModal();">
+                        닫기
+                      </button>
+                  </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="hintModal" style="display: none;">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="hideHintModal();"></div>
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <h3 class="text-5xl leading-6 font-medium text-gray-900" id="modal-title">
+                    Hint 1
+                  </h3>
+                  <div class="mt-2 text-2xl text-gray-500" id="hintModalContent">
+                    <p>장난스러운 당신의 친구는 홈파티 초대장에 보낸 시간을 논리문제로 만들어 첨부하였다.</p>
+                    <p>당신은 친구에게 문제적 남자 시청을 추천했던 과거의 당신을 원망해보지만 이미 늦은 일이다.</p>
+                    <p>과거는 저기너머에 두고 당신의 절친한 친구를 위해 문제를 풀어 홈파티에 참여하자.</p>
+                    <p>a. 홈파티는 수요일에 시작한다.</p>
+                    <p>b. 홈파티는 목요일에 시작한다.</p>
+                    <p>c. 홈파티는 금요일에 시작한다.</p>
+                    <p>d. 홈파티는 토요일에 시작한다.</p>
+                    <p>e. 홈파티는 일요일에 시작한다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 sm:ml-3 sm:w-auto sm:text-sm" onclick="hintClick(1)">
+                다음 힌트
+              </button>
+              <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="hideHintModal();">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <form action="/back_roomSend" method="POST" name="mainForm"> <!--JSON으로 보내야 될듯.. 귀찮으니까 TODO-->
+        <input type="hidden" id="pid" value="{{pid}}">
+        <input type="hidden" id="roomId" value="{{roomId}}">
+        <input type="hidden" id="finishedTime" value="">
+        <input type="hidden" id="device" value="">
+        <input type="hidden" id="rights" value="">
+        <input type="hidden" id="wrongs" value="">
+    </form>
+    <canvas id="mainCanvas" width="10" height="10"></canvas>
+    <!--<button onclick="init();">Start!</button>
+    <button onclick="initLevel1_cli();">Start2!</button>-->
+
+    <!--
+    <button id="hint1" onclick='hintClick("hint1");'>힌트1</button>
+    <button id="hint2" onclick='hintClick("hint2");'>힌트2</button>
+    <button id="hint1" onclick='hintClick("hint3");'>힌트3</button>
+    <button id="hint2" onclick='hintClick("hint4");'>힌트4</button>
+    <button id="hint2" onclick='hintClick("hint5");'>힌트5</button>
+    <button id="pro1" onclick='proClick("pro1");'>문제1</button>
+    <button id="pro2" onclick='proClick("pro2");'>문제2</button>
+    <button id="pro1" onclick='proClick("pro3");'>문제3</button>
+    <button id="pro2" onclick='proClick("pro4");'>문제4</button>
+    <button id="pro2" onclick='proClick("pro5");'>문제5</button>-->
+</body>

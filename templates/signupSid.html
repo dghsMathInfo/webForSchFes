@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <title>회원 가입</title>
+    <script text="text/javascript">
+        function f() {
+            if(document.getElementById('sid1').value != document.getElementById('sid2').value) return false;
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form action="/back_signupSid" method="POST">
+        <input type="hidden" name="name" value="{{prev}}">
+        <p>학번</p>
+        <input id="sid1" name="studentId">
+        <br>
+        <input id="sid2">
+        <input type="submit" value="회원가입" onclick="f();">
+    </form>
+</body>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <title>로그인</title>
+    <script text="text/javascript">
+        function f() {
+            if(document.getElementById('name').value == null || document.getElementById('name').value == '') {
+                alert("이름을 입력해주십시오!");
+                return false;
+            }
+            if(document.getElementById('sid1').value == null || document.getElementById('name').value == '') {
+                alert("학번을 입력해주십시오!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="bg-yellow-100">
+        <form action="/back_login" method="POST">
+            <div class="grid-cols-1">
+                <div><p>Name</p></div>
+                <div><input name="name" id="name"></div>
+                <div><p>학번</p></div>
+                <div><input id="sid1" name="studentId"></div>
+                <div><button type="submit" class="bg-yellow-100"><img src="{{ url_for('static', filename='loginButton.png') }}"></button></div>
+            </div>
+        </form>
+        <a href="/signupName">회원가입 하러 가기</a>
+    </div>
+</body>
