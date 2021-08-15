@@ -153,7 +153,7 @@
             ctx.fillStyle = "gray";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
-            img.src = "{{url_for('static', filename='map_level4.png')}}";
+            img.src = "{{url_for('static', filename='map_level4_forGdata.png')}}";
             img.onload = function () {
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
