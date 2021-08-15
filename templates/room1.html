@@ -146,13 +146,12 @@
         }
 
         function drawLine(ctx, startX, startY, finishX, finishY, width) {
-            ctx.fillStyle = "black";
-            if(Math.abs(finishX - startX) < Math.abs(finishY - startY)) { //vertical
-                ctx.fillRect(startX, startY, finishX - startX + width, finishY - finishY);
-            }
-            else { //horizontal
-                ctx.fillRect(startX, Math.min(finishY, startY), Math.abs(finishX - startX), Math.abs(finishY - finishY) + width);
-            }
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = width;
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(finishX, finishY);
+            ctx.stroke();
         }
 
         function initLevel4_cli() {
