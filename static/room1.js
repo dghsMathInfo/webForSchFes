@@ -6,7 +6,10 @@ var answerIsText = [true, true, true, false, false];
 var answers = ['1', '2', '3', '4', '5', '6'];
 var level = 1;
 var b = [false, false, false, false, false, false];
-var puzzle = [1, 1, 1, 1, 1, 1, 1, 1];
+var puzzle = [];
+for(var i = 0; i < 6; i++) {
+    puzzle.push(Math.floor(Math.random()*(4))); // randon number in {0, 1, 2, 3}
+}
 for(var i = 0; i < 5; i++) {
     h.push([false, false, false]);
 }
@@ -96,6 +99,36 @@ function showHintModal() {
 }
 function hideHintModal() {
     document.getElementById('hintModal').setAttribute('style', 'display: none;');
+}
+
+function rawCoordToImgCoord(x, y, CW, CH, RW, RH) { // x, y, CANVASWIDTH, CANVASHEIGHT, REALWIDTH, REALHEIGHT
+    var isHeightMax = true;
+    if(CW*RH < CH*RW) isHeightMax = false;
+    var normX, normY, imgWidth, imgHeight;
+    if(isHeightMax) {
+        imgWidth = CH*(RW/RH), imgHeight = CH;
+        normX = (CW - imgWidth)/2, normY = 0;
+    }
+    else {
+        imgWidth = CW, imgHeight = CW*(RH/RW);
+        normX = 0, normY = (CH - imgHeight)/2;
+    }
+    return [(x- normX)*(RW/CW), (y - normY)*(RH/CH)];
+}
+function imgCoordToRawCoord(x, y, CW, CH, RW, RH) {
+    var isHeightMax = true;
+    if(CW*RH < CH*RW) isHeightMax = false;
+    var normX, normY, imgWidth, imgHeight;
+    if(isHeightMax) {
+        imgWidth = CH*(RW/RH), imgHeight = CH;
+        normX = (CW - imgWidth)/2, normY = 0;
+    }
+    else {
+        imgWidth = CW, imgHeight = CW*(RH/RW);
+        normX = 0, normY = (CH - imgHeight)/2;
+    }
+    return [(x + normX)*(CW/RW), (y + normY)*(CH/RH)];
+
 }
 
 function nextLevel() {

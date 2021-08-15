@@ -18,8 +18,8 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='invitation.png')}}";
+            const REALWIDTH = 1000, REALHEIGHT = 750;
             img.onload = function () {
-                const REALWIDTH = 1000, REALHEIGHT = 750;
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
                     ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
@@ -45,6 +45,10 @@
                     showHintModal();
                     hintClick(0);
                 }
+                console.log('x y ' + x + ' ' + y);
+                var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
+                console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
+                console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT));
             })
             initLevel1();
         }
