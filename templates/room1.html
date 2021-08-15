@@ -292,7 +292,7 @@
                 console.log('x y ' + x + ' ' + y);
                 var clicked = -1;
                 for(var i = 0; i < 5; i++) {
-                    if(isInRectangle(x, y, fireworks[i][0], fireworks[i][1], 100, 100)) clicked = i; break;console.log(clicked);
+                    if(isInRectangle(x, y, fireworks[i][0], fireworks[i][1], 100, 100)) clicked = i;console.log(clicked);break;
                 }
                 if(focusing) {
                     if(clicked == focused) focusing = false;
