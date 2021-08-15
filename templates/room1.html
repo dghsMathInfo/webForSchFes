@@ -157,6 +157,7 @@
 
         function initLevel4_cli() {
             const REALWIDTH = 4464, REALHEIGHT = 7968;
+            let CW = canvas.getBoundingClientRect().width, CH = canvas.getBoundingClientRect().height;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
@@ -168,23 +169,28 @@
             var img = new Image();
             img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
-                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
-                    var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
-                    ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                if(CW*REALHEIGHT < CH*REALWIDTH) {
+                    var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
+                    ctx.drawImage(img, 0, (CH - imgHeight)/2, imgWidth, imgHeight);
                 }
                 else {
-                    var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
-                    ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                    var imgWidth = CH*(REALWIDTH/REALHEIGHT), imgHeight = CH;
+                    ctx.drawImage(img, (CW - imgWidth)/2, 0, imgWidth, imgHeight);
                 }
                 
             }
             for(var i = 0; i < puzzle.length; i++) {
                 if(PUZZLECOORD[i][puzzle[i]].length == 2) {
-                    drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
+                    var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
+                    var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
+                    drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1]);
                 }
                 else {
-                    drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
-                    drawLine(ctx, PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1]);
+                    var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
+                    var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
+                    var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
+                    drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1]);
+                    drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1]);
                 }
             }
             ctx.fillStyle = "green";
@@ -193,20 +199,20 @@
                 if(level != 4) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
-                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
-                    var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
-                    ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                if(CW*REALHEIGHT < CH*REALWIDTH) {
+                    var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
+                    ctx.drawImage(img, 0, (CH - imgHeight)/2, imgWidth, imgHeight);
                 }
                 else {
-                    var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
-                    ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                    var imgWidth = CH*(REALWIDTH/REALHEIGHT), imgHeight = CH;
+                    ctx.drawImage(img, (CW - imgWidth)/2, 0, imgWidth, imgHeight);
                 }
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
                 console.log('x y ' + x + ' ' + y);
-                var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
+                var tmp = rawCoordToImgCoord(x, y, CW, CH, REALWIDTH, REALHEIGHT);
                 console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
-                console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT));
+                console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], CW, CH, REALWIDTH, REALHEIGHT));
                 for(var i = 0; i < puzzle.length; i++) {
                     var maxX = -1, maxY = -1, minX = 10000, minY = 10000;
                     for(var j = 0; j < 4; j++) {
@@ -217,13 +223,19 @@
                             minY = Math.min(minY, PUZZLECOORD[i][j][k][1]);
                         }
                     }
-                    if(isInRectangle(x, y, minX, minY, maxX - minX, maxY - minY)) puzzle[i] = (puzzle[i] + 1)%4;
+                    var tmp = rawCoordToImgCoord(x, y, CW, CH, REALWIDTH, REALHEIGHT);
+                    if(isInRectangle(tmp[0], tmp[1], minX, minY, maxX - minX, maxY - minY)) puzzle[i] = (puzzle[i] + 1)%4;
                     if(PUZZLECOORD[i][puzzle[i]].length == 2) {
-                        drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
+                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
+                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
+                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1]);
                     }
                     else {
-                        drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
-                        drawLine(ctx, PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1]);
+                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
+                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
+                        var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
+                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1]);
+                        drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1]);
                     }
                 }
             })
