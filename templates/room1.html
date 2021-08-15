@@ -128,7 +128,11 @@
             var img = new Image();
             img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
-                ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
+                const REALWIDTH = 4322, REALHEIGHT = 8142;
+                if(canvas.getBoundingClientRect().width/REALWIDTH > canvas.getBoundingClientRect().height/REALHEIGHT) 
+                    ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH));
+                else                     
+                    ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), canvas.getBoundingClientRect().height);
             }
             ctx.fillStyle = "green";
             ctx.fillRect(5 * 100, 0, 100, 100);
@@ -137,21 +141,6 @@
                 ctx.beginPath();
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
-                for (var i = 0; i < 5; i++) {
-                    if (i * 100 <= x && x <= (i + 1) * 100 && 0 <= y && y <= 100) {
-                        b[i] = !b[i];
-                        console.log('b ' + i + " " + b[i]);
-                    }
-                    ctx.fillStyle = (b[i]) ? "red" : "blue";
-                    ctx.fillRect(i * 100, 0, 100, 100);
-                }
-                if (5 * 100 <= x && x <= (5 + 1) * 100 && 0 <= y && y <= 100) {
-                    var s = 0;
-                    for (var i = 0; i < 5; i++) s += Math.pow(2, i) * b[4 - i];
-                    alert(s);
-                }
-                ctx.fillStyle = "green";
-                ctx.fillRect(5 * 100, 0, 100, 100);
             })
             initLevel4();
         }
