@@ -197,41 +197,7 @@ function submitAnswer() {
     else {
         if(level == 4) {
             if((puzzle[0]%2) && (puzzle[1]%2) && !(puzzle[2]%2) && (puzzle[3]==1) && !puzzle[4] && (puzzle[5]%2)) {
-                const REALWIDTH = 4464, REALHEIGHT = 7968;
-                var canvas = document.getElementById('mainCanvas');
-                let CW = canvas.getBoundingClientRect().width, CH = canvas.getBoundingClientRect().height;
-                var ctx = canvas.getContext('2d');
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.beginPath();
-                ctx.fillStyle = "gray";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                var img = new Image();
-                img.src = "{{url_for('static', filename='map_level4_finished.png')}}";
-                img.onload = function () {
-                    if(CW*REALHEIGHT < CH*REALWIDTH) {
-                        var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
-                        ctx.drawImage(img, 0, (CH - imgHeight)/2, imgWidth, imgHeight);
-                    }
-                    else {
-                        var imgWidth = CH*(REALWIDTH/REALHEIGHT), imgHeight = CH;
-                        ctx.drawImage(img, (CW - imgWidth)/2, 0, imgWidth, imgHeight);
-                    }
-                    for(var i = 0; i < puzzle.length; i++) {
-                        if(PUZZLECOORD[i][puzzle[i]].length == 2) {
-                            var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                            var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                            drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
-                        }
-                        else {
-                            var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                            var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                            var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
-                            drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
-                            drawLine(ctx, Math.min(tmp2[0], tmp3[0]), Math.min(tmp2[1], tmp3[1]), Math.max(tmp2[0], tmp3[0]), Math.max(tmp2[1], tmp3[1]), 5);
-                        }
-                    }
-                }
-                setTimeout(nextLevel(), 3000); 
+                level4Finished();
             }
             else {
                 answer = ""
