@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 import Data
 import time
+import json
 
 app = Flask(__name__)
 app.secret_key = b'_5#y9L"F4M0z\n\xec]/'
@@ -79,16 +80,19 @@ def room(roomId):
 
 @app.route('/back_roomSend', methods=['POST'])
 def back_roomSend():
-    roomId = request.form['roomId']
-    pid = request.form['pid']
-    finishedTime = request.form['finishedTime']
-    device = request.form['device']
-    rights = request.form['rights']
-    wrongs = request.form['wrongs']
+    params = request.get_json()
+    print(params)
+    roomId = params['roomId']
+    pid = params['pid']
+    finishedTime = params['finishedTime']
+    device = params['device']
+    rights = params['rights']
+    wrongs = str(params['wrongs'])
+    h = params['h']
     rateOfRecommendation = -1
     recommended = -1
     roomDb = Data.Room(roomId)
-    roomDb.updatePlay(pid, finishedTime, device, rights, wrongs, rateOfRecommendation, recommended)
+    roomDb.updatePlay(pid, finishedTime, device, rights, wrongs, rateOfRecommendation, recommended, h)
     return redirect(url_for('congratulations', roomId=roomId, pid=pid))
 
 @app.route('/leaderboard/<roomId>')

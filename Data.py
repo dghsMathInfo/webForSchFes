@@ -73,6 +73,7 @@ class Room:
 	        "device"	TEXT,
 	        "rights"	INTEGER,
 	        "wrongs"	TEXT,
+            "h"	TEXT,
 	        "rateOfRecommendation"	INTEGER,
 	        "recommended"	INTEGER,
 	        PRIMARY KEY("pid" AUTOINCREMENT)
@@ -90,8 +91,8 @@ class Room:
         self.c.execute(query)
         self.conn.commit()
 
-    def updatePlay(self, pid:int, finishedTime:int, device:str, rights:int, wrongs:str, rateOfRecommendation:int, recommended:int) -> None:
-        query = f'UPDATE Room_{self.roomId} SET finishedTime = {finishedTime}, device = "{device}", rights = {rights}, wrongs = "{wrongs}", rateOfRecommendation = {rateOfRecommendation}, recommended = {recommended} WHERE pid = {pid}'
+    def updatePlay(self, pid:int, finishedTime:int, device:str, rights:int, wrongs:str, rateOfRecommendation:int, recommended:int, h:str) -> None:
+        query = f'UPDATE Room_{self.roomId} SET finishedTime = {finishedTime}, device = "{device}", rights = {rights}, wrongs = "{wrongs}", rateOfRecommendation = {rateOfRecommendation}, recommended = {recommended}, h = "{h}" WHERE pid = {pid}'
         self.c.execute(query)
         self.conn.commit()
 
