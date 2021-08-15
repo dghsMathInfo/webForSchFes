@@ -105,7 +105,8 @@ class Room:
         query = f'SELECT seq FROM sqlite_sequence WHERE name = "Room_{self.roomId}"'
         self.c.execute(query)
         self.conn.commit()
-        return 1 if (tmp:=self.c.fetchone()) == None else tmp[0] + 1
+        tmp = self.c.fetchone()
+        return 1 if tmp == None else tmp[0] + 1
 
     def getNSFRForAll(self) -> typing.List: #get Name, startTime, finishedTime, rights
         query = f'SELECT name, startTime, finishedTime, rights FROM Room_{self.roomId}'
