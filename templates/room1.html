@@ -129,10 +129,15 @@
             img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
                 const REALWIDTH = 4322, REALHEIGHT = 8142;
-                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) 
-                    ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH));
-                else                     
-                    ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), canvas.getBoundingClientRect().height);
+                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
+                    var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
+                    ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                }
+                else {
+                    var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
+                    ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                }
+                
             }
             ctx.fillStyle = "green";
             ctx.fillRect(5 * 100, 0, 100, 100);
