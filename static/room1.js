@@ -39,6 +39,8 @@ const PUZZLECOORD = [
         [[886.86, 5205], [886.86, 5619]],
     ]
 ]
+var fireworks = [];
+var graph = [];
 for(var i = 0; i < 6; i++) {
     puzzle.push(Math.floor(Math.random()*(4))); // randon number in {0, 1, 2, 3}
 }
@@ -321,11 +323,6 @@ function initLevel5() {
     }
     var questionTitle = document.getElementById('questionModalTitle');
     questionTitle.textContent = "문제 5";
-    var canvas = document.getElementById('mainCanvas');
-    var ctx = canvas.getContext('2d');
-    var img = new Image();
-    img.src = "{{url_for('static', filename='cong.png')}}";
-    img.onload = function () {ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);}
 }
 function init() {
     var canvas = document.getElementById('mainCanvas');

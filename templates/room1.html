@@ -197,6 +197,8 @@
                 if(level != 4) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
+                ctx.fillStyle = "gray";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if(CW*REALHEIGHT < CH*REALWIDTH) {
                     var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
                     ctx.drawImage(img, 0, (CH - imgHeight)/2, imgWidth, imgHeight);
@@ -226,14 +228,14 @@
                     if(PUZZLECOORD[i][puzzle[i]].length == 2) {
                         var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 6);
+                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 5);
                     }
                     else {
                         var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 6);
-                        drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1], 6);
+                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 5);
+                        drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1], 5);
                     }
                 }
             })
@@ -260,20 +262,6 @@
                     var imgWidth = CH*(REALWIDTH/REALHEIGHT), imgHeight = CH;
                     ctx.drawImage(img, (CW - imgWidth)/2, 0, imgWidth, imgHeight);
                 }
-                for(var i = 0; i < puzzle.length; i++) {
-                    if(PUZZLECOORD[i][puzzle[i]].length == 2) {
-                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
-                    }
-                    else {
-                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
-                        drawLine(ctx, Math.min(tmp2[0], tmp3[0]), Math.min(tmp2[1], tmp3[1]), Math.max(tmp2[0], tmp3[0]), Math.max(tmp2[1], tmp3[1]), 5);
-                    }
-                }
             }
             setTimeout(nextLevel(), 3000); 
         }
@@ -287,78 +275,42 @@
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.fillStyle = "gray";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            var img = new Image();
-            img.src = "{{url_for('static', filename='map_level4.png')}}";
-            img.onload = function () {
-                if(CW*REALHEIGHT < CH*REALWIDTH) {
-                    var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
-                    ctx.drawImage(img, 0, (CH - imgHeight)/2, imgWidth, imgHeight);
-                }
-                else {
-                    var imgWidth = CH*(REALWIDTH/REALHEIGHT), imgHeight = CH;
-                    ctx.drawImage(img, (CW - imgWidth)/2, 0, imgWidth, imgHeight);
-                }
-                for(var i = 0; i < puzzle.length; i++) {
-                    if(PUZZLECOORD[i][puzzle[i]].length == 2) {
-                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
-                    }
-                    else {
-                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
-                        drawLine(ctx, Math.min(tmp2[0], tmp3[0]), Math.min(tmp2[1], tmp3[1]), Math.max(tmp2[0], tmp3[0]), Math.max(tmp2[1], tmp3[1]), 5);
-                    }
-                }
+            fireworks = [];
+            ctx.fillStyle = "blue";
+            for(var i = 0; i < 5; i++) {
+                fireworks.push([Math.floor(Math.random()*(CW)), Math.floor(Math.random()*(CH))]);
+                ctx.fillRect(fireworks[i][0], fireworks[i][1], 100, 100);
             }
-            ctx.fillStyle = "green";
-            ctx.fillRect(5 * 100, 0, 100, 100);
+            var focusing = false;
+            var focused = -1;
             canvas.addEventListener('click', function (event) {
-                if(level != 4) return;
+                if(level != 5) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
-                if(CW*REALHEIGHT < CH*REALWIDTH) {
-                    var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
-                    ctx.drawImage(img, 0, (CH - imgHeight)/2, imgWidth, imgHeight);
-                }
-                else {
-                    var imgWidth = CH*(REALWIDTH/REALHEIGHT), imgHeight = CH;
-                    ctx.drawImage(img, (CW - imgWidth)/2, 0, imgWidth, imgHeight);
-                }
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
                 console.log('x y ' + x + ' ' + y);
-                var tmp = rawCoordToImgCoord(x, y, CW, CH, REALWIDTH, REALHEIGHT);
-                console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
-                console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], CW, CH, REALWIDTH, REALHEIGHT));
-                for(var i = 0; i < puzzle.length; i++) {
-                    var maxX = -1, maxY = -1, minX = 10000, minY = 10000;
-                    for(var j = 0; j < 4; j++) {
-                        for(var k = 0; k < PUZZLECOORD[i][j].length; k++) {
-                            maxX = Math.max(maxX, PUZZLECOORD[i][j][k][0]);
-                            maxY = Math.max(maxY, PUZZLECOORD[i][j][k][1]);
-                            minX = Math.min(minX, PUZZLECOORD[i][j][k][0]);
-                            minY = Math.min(minY, PUZZLECOORD[i][j][k][1]);
-                        }
-                    }
-                    var tmp = rawCoordToImgCoord(x, y, CW, CH, REALWIDTH, REALHEIGHT);
-                    if(isInRectangle(tmp[0], tmp[1], minX, minY, maxX - minX, maxY - minY)) puzzle[i] = (puzzle[i] + 1)%4;
-                    if(PUZZLECOORD[i][puzzle[i]].length == 2) {
-                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 6);
-                    }
+                var clicked = -1;
+                for(var i = 0; i < 5; i++) {
+                    if(isInRectangle(x, y, fireworks[i][0], fireworks[i][1], 100, 100)) clicked = i; break;
+                }
+                if(focusing) {
+                    if(clicked == focused) focusing = false;
                     else {
-                        var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 6);
-                        drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1], 6);
+                        graph.push([focused, clicked]);
+                        focusing = false;
                     }
+                }
+                else {
+                    focusing = true;
+                    focused = clicked;
+                }
+                ctx.fillStyle = "blue";
+                for(var i = 0; i < fireworks.length; i++) {
+                    ctx.fillRect(fireworks[i][0], fireworks[i][1], 100, 100);
+                }
+                for(var i = 0; i < graph.length; i++) {
+                    drawLine(ctx, fireworks[graph[i][0]][0], fireworks[graph[i][0]][1], fireworks[graph[i][1]][0], fireworks[graph[i][1]][1], 6);
                 }
             })
             initLevel5();
