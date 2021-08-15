@@ -127,8 +127,10 @@ function imgCoordToRawCoord(x, y, CW, CH, RW, RH) {
         imgWidth = CW, imgHeight = CW*(RH/RW);
         normX = 0, normY = (CH - imgHeight)/2;
     }
-    return [(x + normX)*(CW/RW), (y + normY)*(CH/RH)];
-
+    return [(x)*(CW/RW) + normX, (y)*(CH/RH) + normY];
+}
+function isInRectangle(x, y, normX, normY, width, height) {
+    return (normX <= x && x <= normX + width && normY <= y && y <= normY + height);
 }
 
 function nextLevel() {

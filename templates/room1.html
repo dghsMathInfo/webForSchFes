@@ -8,6 +8,7 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/javascript">
         function initLevel1_cli() {
+            const REALWIDTH = 1000, REALHEIGHT = 750;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
@@ -18,7 +19,6 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='invitation.png')}}";
-            const REALWIDTH = 1000, REALHEIGHT = 750;
             img.onload = function () {
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
@@ -38,10 +38,10 @@
             canvas.addEventListener('click', function (event) {
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
-                if (100 <= x && x <= 200 && 100 <= y && y <= 200) {
+                if (isInRectangle(x, y, 100, 100, 100, 100)) {
                     showQuestionModal();
                 }
-                if (400 <= x && x <= 500 && 400 <= y && y <= 500) {
+                if (isInRectangle(x, y, 400, 400, 100, 100)) {
                     showHintModal();
                     hintClick(0);
                 }
@@ -53,6 +53,7 @@
             initLevel1();
         }
         function initLevel2_cli() {
+            const REALWIDTH = 656, REALHEIGHT = 871;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
@@ -64,7 +65,6 @@
             var img = new Image();
             img.src = "{{url_for('static', filename='howmany.png')}}";
             img.onload = function () {
-                const REALWIDTH = 656, REALHEIGHT = 871;
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
                     ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
@@ -83,10 +83,10 @@
             canvas.addEventListener('click', function (event) {
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
-                if (100 <= x && x <= 200 && 100 <= y && y <= 200) {
+                if (isInRectangle(x, y, 100, 100, 100, 100)) {
                     showQuestionModal();
                 }
-                if (400 <= x && x <= 500 && 400 <= y && y <= 500) {
+                if (isInRectangle(x, y, 400, 400, 100, 100)) {
                     showHintModal();
                     hintClick(0);
                 }
@@ -114,14 +114,14 @@
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
                 for (var i = 0; i < 5; i++) {
-                    if (i * 100 <= x && x <= (i + 1) * 100 && 0 <= y && y <= 100) {
+                    if (isInRectangle(x, y, i*100, 0, 100, 100)) {
                         b[i] = !b[i];
                         console.log('b ' + i + " " + b[i]);
                     }
                     ctx.fillStyle = (b[i]) ? "red" : "blue";
                     ctx.fillRect(i * 100, 0, 100, 100);
                 }
-                if (5 * 100 <= x && x <= (5 + 1) * 100 && 0 <= y && y <= 100) {
+                if (isInRectangle(x, y, 500, 0, 100, 100)) {
                     var s = 0;
                     for (var i = 0; i < 5; i++) s += Math.pow(2, i) * b[4 - i];
                     alert(s);
@@ -131,10 +131,10 @@
                 ctx.fillStyle = "blue";
                 ctx.fillRect(100, 100, 100, 100);
                 ctx.fillRect(400, 400, 100, 100);
-                if (100 <= x && x <= 200 && 100 <= y && y <= 200) {
+                if (isInRectangle(x, y, 100, 100, 100, 100)) {
                     showQuestionModal();
                 }
-                if (400 <= x && x <= 500 && 400 <= y && y <= 500) {
+                if (isInRectangle(x, y, 400, 400, 100, 100)) {
                     showHintModal();
                     hintClick(0);
                 }
@@ -143,6 +143,7 @@
         }
 
         function initLevel4_cli() {
+            const REALWIDTH = 4464, REALHEIGHT = 7968;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
@@ -154,7 +155,6 @@
             var img = new Image();
             img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
-                const REALWIDTH = 4322, REALHEIGHT = 8142;
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
                     ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
@@ -170,8 +170,20 @@
             canvas.addEventListener('click', function (event) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
+                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
+                    var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
+                    ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                }
+                else {
+                    var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
+                    ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                }
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
+                console.log('x y ' + x + ' ' + y);
+                var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
+                console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
+                console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT));
             })
             initLevel4();
         }
