@@ -151,7 +151,7 @@
                 ctx.fillRect(startX, startY, finishX - startX + width, finishY - finishY);
             }
             else { //horizontal
-                ctx.fillRect(startX, Math.min(finishX, startX), Math.abs(finishX - startX), Math.abs(finishY - finishY) + width);
+                ctx.fillRect(startX, Math.min(finishY, startY), Math.abs(finishX - startX), Math.abs(finishY - finishY) + width);
             }
         }
 
