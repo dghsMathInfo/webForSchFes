@@ -36,6 +36,7 @@
                 ctx.fill();
             }
             canvas.addEventListener('click', function (event) {
+                if(level != 1) return;
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
                 if (isInRectangle(x, y, 100, 100, 100, 100)) {
@@ -81,6 +82,7 @@
                 ctx.fill();
             }
             canvas.addEventListener('click', function (event) {
+                if(level != 2) return;
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
                 if (isInRectangle(x, y, 100, 100, 100, 100)) {
@@ -109,6 +111,7 @@
             ctx.fillStyle = "green";
             ctx.fillRect(5 * 100, 0, 100, 100);
             canvas.addEventListener('click', function (event) {
+                if(level != 3) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
                 var x = event.pageX - canvasLeft;
@@ -142,6 +145,16 @@
             initLevel3();
         }
 
+        function drawLine(ctx, startX, startY, finishX, finishY, width) {
+            ctx.fillStyle = "black";
+            if(Math.abs(finishX - startX) < Math.abs(finishY - startY)) { //vertical
+                ctx.fillRect(startX, startY, finishX - startX + width, finishY - finishY);
+            }
+            else { //horizontal
+                ctx.fillRect(startX, startY, finishX - startX, finishY - finishY + width);
+            }
+        }
+
         function initLevel4_cli() {
             const REALWIDTH = 4464, REALHEIGHT = 7968;
             var canvas = document.getElementById('mainCanvas');
@@ -153,7 +166,7 @@
             ctx.fillStyle = "gray";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
-            img.src = "{{url_for('static', filename='map_level4_forGdata.png')}}";
+            img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
@@ -165,9 +178,19 @@
                 }
                 
             }
+            for(var i = 0; i < puzzle.length; i++) {
+                if(PUZZLECOORD[i][puzzle[i]].length == 2) {
+                    drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
+                }
+                else {
+                    drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
+                    drawLine(ctx, PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1]);
+                }
+            }
             ctx.fillStyle = "green";
             ctx.fillRect(5 * 100, 0, 100, 100);
             canvas.addEventListener('click', function (event) {
+                if(level != 4) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
@@ -184,6 +207,25 @@
                 var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
                 console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
                 console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT));
+                for(var i = 0; i < puzzle.length; i++) {
+                    var maxX = -1, maxY = -1, minX = 10000, minY = 10000;
+                    for(var j = 0; j < 4; j++) {
+                        for(var k = 0; k < PUZZLECOORD[i][j].length; k++) {
+                            maxX = Math.max(maxX, PUZZLECOORD[i][j][k][0]);
+                            maxY = Math.max(maxY, PUZZLECOORD[i][j][k][1]);
+                            minX = Math.min(minX, PUZZLECOORD[i][j][k][0]);
+                            minY = Math.min(minY, PUZZLECOORD[i][j][k][1]);
+                        }
+                    }
+                    if(isInRectangle(x, y, minX, minY, maxX - minX, maxY - minY)) puzzle[i] = (puzzle[i] + 1)%4;
+                    if(PUZZLECOORD[i][puzzle[i]].length == 2) {
+                        drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
+                    }
+                    else {
+                        drawLine(ctx, PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1]);
+                        drawLine(ctx, PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1]);
+                    }
+                }
             })
             initLevel4();
         }
