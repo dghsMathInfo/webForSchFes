@@ -196,11 +196,12 @@ function submitAnswer() {
     }
     else {
         if(level == 4) {
-            var flag = true;
-            for(var i = 0; i < puzzle.length; i++) {
-                if(puzzle[i] != 1) flag = false; break;
+            if((puzzle[0]%2) && (puzzle[1]%2) && !(puzzle[2]%2) && (puzzle[3]==1) && !puzzle[4] && (puzzle[5]%2)) nextLevel();
+            else {
+                answer = ""
+                for(var i = 0; i < 6; i++) answer += puzzle[i];
+                wrong();
             }
-            (flag)?nextLevel():wrong();
         }
         else {
 
