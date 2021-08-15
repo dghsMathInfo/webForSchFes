@@ -129,7 +129,7 @@
             img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
                 const REALWIDTH = 4322, REALHEIGHT = 8142;
-                if(canvas.getBoundingClientRect().width/REALWIDTH > canvas.getBoundingClientRect().height/REALHEIGHT) 
+                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) 
                     ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH));
                 else                     
                     ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), canvas.getBoundingClientRect().height);
