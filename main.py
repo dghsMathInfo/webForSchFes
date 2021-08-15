@@ -46,7 +46,8 @@ def back_login():
     studentId = int(request.form['studentId'])
     print(name, studentId)
     userDb = Data.UserDb()
-    if (tmp := userDb.getStudentId(name)) != None:
+    tmp = userDb.getStudentId(name)
+    if tmp != None:
         print(type(tmp), type(studentId))
         if tmp == studentId:
             session['name'] = name
