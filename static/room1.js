@@ -259,8 +259,8 @@ function initLevel5() {
 }
 function init() {
     var canvas = document.getElementById('mainCanvas');
-    canvas.height = screen.height;
-    canvas.width = screen.width;
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
     var modalBg = document.getElementById('questionModal')
     modalBg.width = screen.width;
     modalBg.height = screen.height;
