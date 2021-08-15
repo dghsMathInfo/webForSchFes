@@ -41,6 +41,8 @@ const PUZZLECOORD = [
 ]
 var fireworks = [];
 var graph = [];
+var focusing;
+var focused;
 for(var i = 0; i < 6; i++) {
     puzzle.push(Math.floor(Math.random()*(4))); // randon number in {0, 1, 2, 3}
 }
