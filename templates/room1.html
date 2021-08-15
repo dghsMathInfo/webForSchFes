@@ -14,10 +14,20 @@
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
+            ctx.fillStyle = "gray";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='invitation.png')}}";
             img.onload = function () {
-                ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
+                const REALWIDTH = 1000, REALHEIGHT = 750;
+                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
+                    var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
+                    ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                }
+                else {
+                    var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
+                    ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                }
                 ctx.rect(100, 100, 100, 100);
                 ctx.fillStyle = "red";
                 ctx.fill();
@@ -45,10 +55,20 @@
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
+            ctx.fillStyle = "gray";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='howmany.png')}}";
             img.onload = function () {
-                ctx.drawImage(img, 0, 0, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
+                const REALWIDTH = 656, REALHEIGHT = 871;
+                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
+                    var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
+                    ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                }
+                else {
+                    var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
+                    ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                }
                 ctx.rect(100, 100, 100, 100);
                 ctx.fillStyle = "red";
                 ctx.fill();
@@ -125,6 +145,8 @@
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
+            ctx.fillStyle = "gray";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
