@@ -294,17 +294,19 @@
                 for(var i = 0; i < 5; i++) {
                     if(isInRectangle(x, y, fireworks[i][0], fireworks[i][1], 100, 100)) clicked = i;console.log(clicked);break;
                 }
-                if(focusing) {
-                    if(clicked == focused) focusing = false;
-                    else {
-                        graph.push([focused, clicked]);
-                        console.log(graph[graph.length - 1]);
-                        focusing = false;
+                if(clicked != -1) {
+                    if(focusing) {
+                        if(clicked == focused) focusing = false;
+                        else {
+                            graph.push([focused, clicked]);
+                            console.log(graph[graph.length - 1]);
+                            focusing = false;
+                        }
                     }
-                }
-                else {
-                    focusing = true;
-                    focused = clicked;
+                    else {
+                        focusing = true;
+                        focused = clicked;
+                    }
                 }
                 ctx.fillStyle = "blue";
                 for(var i = 0; i < fireworks.length; i++) {
@@ -326,6 +328,7 @@
 </head>
 
 <body>
+    <script>0</script>
     <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
         id="questionModal" style="display: none;">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
