@@ -5,9 +5,10 @@
 <body>
     <p>축하합니다!!!</p>
     <form action="/back_congratulations" method="POST">
-        <input type="hidden" id="pid" value="{{pid}}">
-        <input type="hidden" id="roomId" value="{{roomId}}">
-        <input id="rateOfRecommendation" value="">
-        <input id="recommended" value="">
+        <input type="hidden" id="pid" name="pid" value="{{pid}}">
+        <input type="hidden" id="roomId" name="roomId" value="{{roomId}}">
+        <input type="number" id="rateOfRecommendation" name="rateOfRecommendation" value="">
+        <input type="number" id="recommended" name="recommended" value="">
+        <input type="submit" value="확인">
     </form>
 </body>
