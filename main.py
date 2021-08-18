@@ -76,7 +76,7 @@ def room(roomId):
     pid = roomDb.getNextPid()
     #session['roomId'] = roomId
     #session['pid'] = pid
-    roomDb.uploadPlay(session['name'], time.time()*10000000)
+    roomDb.uploadPlay(session['name'], int(time.time()))
     return render_template(f'room{roomId}.html', pid = pid, roomId = roomId)
 
 @app.route('/back_roomSend', methods=['POST'])
@@ -85,7 +85,7 @@ def back_roomSend():
     print(params)
     roomId = params['roomId']
     pid = params['pid']
-    finishedTime = params['finishedTime']
+    finishedTime = int(float(params['finishedTime'])/1000)
     device = params['device']
     rights = params['rights']
     wrongs = str(params['wrongs'])
@@ -100,14 +100,30 @@ def back_roomSend():
 def leaderboard():
     roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
-    tmp = roomDb.getNSFRForAll()
+    tmp = roomDb.getNSFRWHForAll()
     tmp.sort(key = lambda x:x[-1])
     for i in range(len(tmp)):
         tmp[i] = list(tmp[i])
+        tmp[i].append(getScore(tmp[i][1], tmp[i][2], tmp[i][5], tmp[i][4], tmp[i][3]))
     for i in range(len(tmp)):
-        tmp[i][1] = datetime.datetime.fromtimestamp(int(tmp[i][1]/10000000))
-        tmp[i][2] = datetime.datetime.fromtimestamp(int(tmp[i][2]/1000))
+        tmp[i][1] = datetime.datetime.fromtimestamp(tmp[i][1])
+        tmp[i][2] = datetime.datetime.fromtimestamp(tmp[i][2])
     return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
+
+def getScore(startTime:int, finishedTime:int, h:str, wrongs:str, right:int):
+    deltaT = finishedTime - startTime
+    wrongs = len(wrongs.split(',')) - (5 if right == 5 else (right + 1))
+    ALPHA = 500
+    BETA = 2
+    GAMMA = 1
+    DELTA = 4
+    EPSILON = 17
+    score = ALPHA
+    for i in range(len(h)):
+        score -= BETA**int(h[i])*(i%3 + 1)
+    score -= GAMMA*deltaT + DELTA*wrongs - EPSILON*right
+    return score
+    
 
 @app.route('/survey')
 def survey():
