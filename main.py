@@ -105,7 +105,7 @@ def leaderboard():
     for i in range(len(tmp)):
         tmp[i] = list(tmp[i])
     for i in range(len(tmp)):
-        tmp[i][1] = datetime.datetime.fromtimestamp(tmp[i][1]/1000)
+        tmp[i][1] = datetime.datetime.fromtimestamp(tmp[i][1]/10000000)
         tmp[i][2] = datetime.datetime.fromtimestamp(tmp[i][2]/1000)
     return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
 
