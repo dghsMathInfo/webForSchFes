@@ -66,16 +66,16 @@ class Room:
     def makeDb(self) -> None:
         query = f"""
             CREATE TABLE "Room_{self.roomId}" (
-	        "pid"	INTEGER,
-	        "name"	TEXT NOT NULL,
-	        "startTime"	INTEGER NOT NULL,
-	        "finishedTime"	INTEGER,
-	        "device"	TEXT,
-	        "rights"	INTEGER,
-	        "wrongs"	TEXT,
-            "h"	TEXT,
-	        "rateOfRecommendation"	INTEGER,
-	        "recommended"	INTEGER,
+            "pid"	INTEGER,
+	        "name"	TEXT NOT NULL DEFAULT -1,
+	        "startTime"	INTEGER NOT NULL DEFAULT -1,
+	        "finishedTime"	INTEGER DEFAULT -1,
+	        "device"	TEXT DEFAULT -1,
+	        "rights"	INTEGER DEFAULT -1,
+	        "wrongs"	TEXT DEFAULT -1,
+	        "h"	TEXT DEFAULT -1,
+	        "rateOfRecommendation"	INTEGER DEFAULT -1,
+	        "recommended"	INTEGER DEFAULT -1,
 	        PRIMARY KEY("pid" AUTOINCREMENT)
             );"""
         self.c.execute(query)
