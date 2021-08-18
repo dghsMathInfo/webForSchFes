@@ -101,7 +101,7 @@ def leaderboard():
     roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
     tmp = roomDb.getNSFRForAll()
-    tmp.sort(key = lambda x:x[-1])]
+    tmp.sort(key = lambda x:x[-1])
     for i in range(len(tmp)):
         tmp[i] = list(tmp)
     for i in range(len(tmp)):
