@@ -227,9 +227,10 @@ function submitAnswer() {
             }
         }
         else {
+            p = [];
             var flag = true;
             for(var i = 0; i < FIREWORKSCOUNT; i++) {
-                p[i] = i;
+                p.push(i);
             }
             for(var i = 0; i < graph.length; i++) {
                 for(var j = 0; j < graph.length; j++) {
