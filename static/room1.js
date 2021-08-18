@@ -40,6 +40,7 @@ const PUZZLECOORD = [
     ]
 ]
 var fireworks = [];
+const FIREWORKSCOUNT = 5;
 var graph = [];
 var focusing;
 var focused;
@@ -50,7 +51,7 @@ for(var i = 0; i < 5; i++) {
     h.push([false, false, false]);
 }
 var prevHintRank = -1;
-
+var p;
 function hintClick(next) {
     if(!next) {
         document.getElementById('modal-title').textContent = "Hint 0";
@@ -185,6 +186,22 @@ function wrong() {
     sendInfo();
 }
 
+function find(n) {
+    if(p[n] == n) return n;
+    return p[n] = find(p[n]);
+}
+
+function union(n1, n2) {
+    n1 = find(n1);
+    n2 = find(n2);
+    if(n1 < n2) {
+        p[n2] = n1;
+    }
+    else {
+        p[n1] = n2;
+    }
+}
+
 function submitAnswer() {
     var answer = document.getElementById('answer').value;
     console.log(answer);
@@ -210,8 +227,27 @@ function submitAnswer() {
             }
         }
         else {
-            if(!true) {
-
+            var flag = true;
+            for(var i = 0; i < FIREWORKSCOUNT; i++) {
+                p[i] = i;
+            }
+            for(var i = 0; i < graph.length; i++) {
+                for(var j = 0; j < graph.length; j++) {
+                    if(i != j) {
+                        union(graph[j][0], graph[j][1]);
+                    }
+                }
+                for(var j = 0; j < FIREWORKSCOUNT; j++) find(j);
+                for(var j = 0; j < FIREWORKSCOUNT; j++) {
+                    if(p[j] != p[0]) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if(!flag) break;
+            }
+            if(flag) {
+                end();
             }
             else {
                 answer = "";

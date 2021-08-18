@@ -291,7 +291,7 @@
                 var y = event.pageY - canvasTop;
                 console.log('x y ' + x + ' ' + y);
                 var clicked = -1;
-                for(var i = 0; i < 5; i++) {
+                for(var i = 0; i < FIREWORKSCOUNT; i++) {
                     if(isInRectangle(x, y, fireworks[i][0], fireworks[i][1], 100, 100)) {
                         clicked = i;
                         console.log(clicked);
