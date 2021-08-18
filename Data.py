@@ -129,4 +129,5 @@ if __name__ == '__main__':
     """
     data = UserDb()
     room = Room(1)
-    room.deleteAll()
+    #room.deleteAll()
+    room.makeDb()
