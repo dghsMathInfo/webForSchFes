@@ -278,7 +278,7 @@
             graph = [];
             ctx.fillStyle = "blue";
             for(var i = 0; i < 5; i++) {
-                fireworks.push([Math.floor(Math.random()*(CW)), Math.floor(Math.random()*(CH))]);
+                fireworks.push([Math.floor(Math.random()*(CW/2)), Math.floor(Math.random()*(CH/2))]);
                 ctx.fillRect(fireworks[i][0], fireworks[i][1], 100, 100);
             }
             focusing = false;
