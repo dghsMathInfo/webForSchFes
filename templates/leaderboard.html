@@ -18,6 +18,7 @@
                     {% for i in range(thingLen)%}
                         {% if i == 0 %}
                             <tr class="bg-yellow-400">
+                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px rgb(0, 0, 0);">1</td>
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px rgb(0, 0, 0);">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
@@ -25,6 +26,7 @@
                             </tr>
                         {% elif i == 1 %}
                             <tr class="bg-yellow-300">
+                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">2</td>
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
@@ -32,6 +34,7 @@
                             </tr>
                         {% elif i == 2 %}
                             <tr class="bg-yellow-200">
+                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">3</td>
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
@@ -39,6 +42,7 @@
                             </tr>
                         {% else %}
                             <tr class="bg-yellow-100">
+                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{i+1}}</td>
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>

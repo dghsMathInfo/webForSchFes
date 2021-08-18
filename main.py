@@ -101,6 +101,7 @@ def leaderboard():
     roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
     tmp = roomDb.getNSFRForAll()
+    tmp.sort(key = lambda x:x[-1])
     return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
 
 @app.route('/survey')

@@ -248,6 +248,7 @@ function submitAnswer() {
                 if(!flag) break;
             }
             if(flag) {
+                rights++;
                 end();
             }
             else {
