@@ -120,10 +120,10 @@ def back_survey():
     userDb.updateUser(session['name'], mbti, recentMathPCnt, rateOfLikingMath, mostLikeMathField, survyed)
     return redirect(f'/room/{roomId}')
 
-@app.route('/congratulations')
+@app.route('/congratulations', methods=['GET'])
 def congratulations():
-    roomId = int(request.args.get('roomId'))
-    pid = int(request.args.get('pid'))
+    roomId = request.args.get('roomId')
+    pid = request.args.get('pid')
     return render_template('congratulations.html', roomId=roomId, pid=pid)
 
 @app.route('/back_congratulations', methods=['POST'])
