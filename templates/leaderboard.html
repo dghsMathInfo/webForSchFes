@@ -4,6 +4,7 @@
     <title>리더보드</title>
 </head>
 <body class="bg-yellow-100">
+    <a href="/">goto home!!</a>
     <div class="container mt-20 mr-8 ml-8 mb-8 bg-white">
         <p class="font-black text-yellow-400 text-7xl" style="-webkit-text-stroke: 3px black;">RANK</p>
         <div class="container mt-20 mr-4 ml-4 mb-4">
@@ -20,24 +21,28 @@
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px rgb(0, 0, 0);">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
+                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
                             </tr>
                         {% elif i == 1 %}
                             <tr class="bg-yellow-300">
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
+                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
                             </tr>
                         {% elif i == 2 %}
                             <tr class="bg-yellow-200">
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
+                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
                             </tr>
                         {% else %}
                             <tr class="bg-yellow-100">
                                 <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
                                 <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
                                 <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
+                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
                             </tr>
                         {% endif %}
                     {% endfor %}

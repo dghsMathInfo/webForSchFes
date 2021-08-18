@@ -100,7 +100,7 @@ def back_roomSend():
 def leaderboard():
     roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
-    tmp = [[i]*3 for i in range(10)]
+    tmp = roomDb.getNSFRForAll()
     return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
 
 @app.route('/survey')
