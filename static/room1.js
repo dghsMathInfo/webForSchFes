@@ -149,7 +149,7 @@ function rawCoordToImgCoord(x, y, CW, CH, RW, RH) { // x, y, CANVASWIDTH, CANVAS
         imgWidth = CW, imgHeight = CW*(RH/RW);
         normX = 0, normY = (CH - imgHeight)/2;
     }
-    return [(x- normX)*(RW/CW), (y - normY)*(RH/CH)];
+    return [(x- normX)*(RW/(CW - 2*normX)), (y - normY)*(RH/(CH - 2*normY))];
 }
 function imgCoordToRawCoord(x, y, CW, CH, RW, RH) {
     var isHeightMax = true;
@@ -163,7 +163,7 @@ function imgCoordToRawCoord(x, y, CW, CH, RW, RH) {
         imgWidth = CW, imgHeight = CW*(RH/RW);
         normX = 0, normY = (CH - imgHeight)/2;
     }
-    return [(x)*(CW/RW) + normX, (y)*(CH/RH) + normY];
+    return [(x)*((CW - 2*normX)/RW) + normX, (y)*((CH - 2*normY)/RH) + normY];
 }
 function isInRectangle(x, y, normX, normY, width, height) {
     return (normX <= x && x <= normX + width && normY <= y && y <= normY + height);
