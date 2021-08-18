@@ -166,7 +166,7 @@
             ctx.fillStyle = "gray";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
-            img.src = "{{url_for('static', filename='map_level4_forGdata.png')}}";
+            img.src = "{{url_for('static', filename='map_level4.png')}}";
             img.onload = function () {
                 if(CW*REALHEIGHT < CH*REALWIDTH) {
                     var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
