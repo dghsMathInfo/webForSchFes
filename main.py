@@ -76,7 +76,7 @@ def room(roomId):
     pid = roomDb.getNextPid()
     #session['roomId'] = roomId
     #session['pid'] = pid
-    roomDb.uploadPlay(session['name'], int(time.time()))
+    roomDb.uploadPlay(session['name'], time.time()*10000000)
     return render_template(f'room{roomId}.html', pid = pid, roomId = roomId)
 
 @app.route('/back_roomSend', methods=['POST'])
