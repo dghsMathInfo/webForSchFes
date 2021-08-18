@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 import Data
 import time
-import json
+import datetime
 
 app = Flask(__name__)
 app.secret_key = b'_5#y9L"F4M0z\n\xec]/'
@@ -102,6 +102,9 @@ def leaderboard():
     #tmp = roomDb.getNSFRForAll()
     tmp = roomDb.getNSFRForAll()
     tmp.sort(key = lambda x:x[-1])
+    for i in range(len(tmp)):
+        tmp[i][1] = datetime.datetime.fromtimestamp(tmp[i][1])
+        tmp[i][2] = datetime.datetime.fromtimestamp(tmp[i][2])
     return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
 
 @app.route('/survey')

@@ -217,6 +217,8 @@ function submitAnswer() {
     else {
         if(level == 4) {
             if((puzzle[0]%2) && (puzzle[1]%2) && !(puzzle[2]%2) && (puzzle[3]==1) && !puzzle[4] && (puzzle[5]%2)) {
+                rights++;
+                level++;
                 level4Finished();
             }
             else {
