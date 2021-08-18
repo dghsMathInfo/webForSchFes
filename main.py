@@ -103,7 +103,7 @@ def leaderboard():
     tmp = roomDb.getNSFRForAll()
     tmp.sort(key = lambda x:x[-1])
     for i in range(len(tmp)):
-        tmp[i] = list(tmp)
+        tmp[i] = list(tmp[i])
     for i in range(len(tmp)):
         tmp[i][1] = datetime.datetime.fromtimestamp(tmp[i][1])
         tmp[i][2] = datetime.datetime.fromtimestamp(tmp[i][2])
