@@ -204,13 +204,22 @@ function submitAnswer() {
                 level4Finished();
             }
             else {
-                answer = ""
+                answer = "";
                 for(var i = 0; i < 6; i++) answer += puzzle[i];
                 wrong();
             }
         }
         else {
+            if(!true) {
 
+            }
+            else {
+                answer = "";
+                for(var i = 0; i < graph.length; i++) {
+                    answer += (!i)?("/" + graph[i][0] + graph[i][1]):(graph[i][0] + graph[i][1]);
+                }
+                wrong();
+            }
         }
     }
     sendInfo();
