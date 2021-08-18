@@ -96,9 +96,9 @@ def back_roomSend():
     roomDb.updatePlay(pid, finishedTime, device, rights, wrongs, rateOfRecommendation, recommended, h)
     return redirect(url_for('congratulations', roomId=roomId, pid=pid))
 
-@app.route('/leaderboard/<roomId>')
-def leaderboard(roomId):
-    roomDb = Data.Room(roomId)
+@app.route('/leaderboard')
+def leaderboard():
+    roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
     tmp = [[i]*3 for i in range(10)]
     return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
@@ -134,7 +134,7 @@ def back_congratulations():
     recommended = request.form['recommended']
     roomDb = Data.Room(roomId)
     roomDb.updateRec(pid, rateOfRecommendation, recommended)
-    return redirect(url_for(leaderboard))
+    return redirect(url_for('leaderboard', roomId = roomId))
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=80, debug=True)
