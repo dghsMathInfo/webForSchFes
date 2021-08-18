@@ -83,8 +83,8 @@ class Room:
 
     def deleteAll(self) -> None:
         query = f'DROP TABLE Room_{self.roomId}'
-        self.c.execute()
-        self.conn.commit
+        self.c.execute(query)
+        self.conn.commit()
     
     def uploadPlay(self, name:str, startTime:int) -> None:
         query = f'INSERT INTO Room_{self.roomId} (name, startTime) VALUES ("{name}", {startTime})'
@@ -128,4 +128,5 @@ if __name__ == '__main__':
     print(a.getNextPid())
     """
     data = UserDb()
-    print(data.getStudentId('arduinocc04'))
+    room = Room(1)
+    room.deleteAll()

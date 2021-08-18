@@ -94,8 +94,7 @@ function hintClick(next) {
 function end() {
     // finishedTime, rights, wrongs
     sendInfo();
-    window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1"
-    //document.mainForm.submit();
+    window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1";
 }
 
 function sendInfo() {
