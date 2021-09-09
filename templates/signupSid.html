@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <head>
     <title>회원 가입</title>
     <script text="text/javascript">
@@ -8,13 +9,20 @@
         }
     </script>
 </head>
-<body>
-    <form action="/back_signupSid" method="POST">
-        <input type="hidden" name="name" value="{{prev}}">
-        <p>학번</p>
-        <input id="sid1" name="studentId">
-        <br>
-        <input id="sid2">
-        <input type="submit" value="회원가입" onclick="f();">
-    </form>
+<body class="bg-blue-50">
+    <div class="flex justify-center mt-10 sm:mt-15">
+        <div class="flex justify-center p-30 text-gray-500 text-xl ">
+            <div>
+                <form action="/back_signupSid" method="POST">
+                    <input type="hidden" name="name" value="{{prev}}">
+                    <p>학번</p>
+                    <input class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="sid1" name="studentId" placeholder="학번을 입력해주세요.">
+                    <p>학번 재입력</p>
+                    <input class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="sid2" placeholder="다시 입력해주세요.">
+                    <div class="flex mt-3 justify-center"><input class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white text-black py-1 px-4" type="submit" value="회원가입" onclick="f();"></div>
+                </form>
+                <div class="container mt-3"><a class="underline text-base text-gray-400" href="/login">로그인 하러 가기</a></div>
+            </div>
+        </div>
+    </div>
 </body>

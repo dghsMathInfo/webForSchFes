@@ -3,30 +3,39 @@
 <head>
     <title>설문조사</title>
 </head>
-<body>
-    <div class="container mt-20 mr-30 ml-30">
-        <p class="text-7xl font-black">설문조사</p>
-        <form action="/back_survey" method="POST">
-            <input name="roomId" type="hidden" val="{{roomId}}">
-            <div class="grid grid-cols-1">
-                <div class="w-1/4">
-                    <p class="text-2xl bg-yellow-100">mbti?</p>
-                    <input name="mbti">
-                </div>
-                <div class="w-1/4">
-                    <p class="text-2xl bg-yellow-100">최근 푼 수학 문제 수?</p>
-                    <input name="recentMathPCnt" type="number">
-                </div>
-                <div class="w-1/4">
-                    <p class="text-2xl bg-yellow-100">수학 얼마나 좋아하는지?</p>
-                    <input name="rateOfLikingMath" type="number">
-                </div>
-                <div class="w-1/4">
-                    <p class="text-2xl bg-yellow-100">가장 좋아하는 수학 분야?</p>
-                    <input name="mostLikeMathField">
-                </div>
-                <input type="submit" value="저장">
+<body class="bg-blue-50">
+        <p class="text-3xl sm:text-7xl font-black mt-3 text-gray-700">설문조사</p>
+        <div class="flex justify-center mt-10 sm:mt-15">
+            <div class="flex justify-center p-30 text-gray-500 text-xl">
+                <form action="/back_survey" method="POST">
+                    <input name="roomId" type="hidden" val="{{roomId}}">
+                        <div class="">
+                            <p class="">mbti는?(소문자로)</p>
+                            <input name="mbti" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin">
+                        </div>
+                        <div class="pt-3">
+                            <p class="">최근 일주일간 푼 수학 문제 수는?</p>
+                            <select name="recentMathPCnt" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin">
+                            <option value="0">0</option>
+                            <option value="1">1~50</option>
+                            <option value="2">51~100</option>
+                            <option value="3">100~200</option>
+                            <option value="4">200~300</option>
+                            <option value="5">300~400</option>
+                            <option value="6">400~500</option>
+                            <option value="7">500~</option>
+                            </select>
+                        </div>  
+                        <div class="pt-3">
+                            <p class="">수학을 좋아하는 정도는(1~5)?</p>
+                            <input type="number" name="rateOfLikingMath" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin">
+                        </div>
+                        <div class="pt-3">
+                            <p class="">가장 좋아하는 수학 분야는?</p>
+                            <input name="mostLikeMathField" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin">
+                        </div>
+                        <div class="flex mt-3 justify-center pt-3"><input class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white text-black py-1 px-4" type="submit" value="저장"></div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
 </body>

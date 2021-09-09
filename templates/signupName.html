@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <head>
     <title>회원 가입</title>
     <script text="text/javascript">
@@ -7,12 +8,19 @@
         }
     </script>
 </head>
-<body>
+<body class="bg-blue-50">
     <input id="failed" type="hidden" value="{{failed}}">
-    <form action="/back_signupName" method="POST">
-        <p>Id</p>
-        <input name="name">
-        <br>
-        <input type="submit" value="다음">
-    </form>
+    <div class="flex justify-center mt-10 sm:mt-15">
+        <div class="flex justify-center p-30 text-gray-500 text-xl ">
+            <div>
+                <form action="/back_signupName" method="POST">
+                    <p>이름(닉네임)</p>
+                    <input class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" name="name" placeholder="이름을 입력하세요.">
+                    <br>
+                    <div class="flex mt-3 justify-center"><input class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white text-black py-1 px-4" type="submit" value="다음"></div>
+                </form>
+                <div class="container mt-3"><a class="underline text-base text-gray-400" href="/login">로그인 하러 가기</a></div>
+            </div>
+        </div>
+    </div>
 </body>

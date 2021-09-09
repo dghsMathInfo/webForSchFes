@@ -8,37 +8,42 @@ var level = 1;
 var b = [false, false, false, false, false, false];
 var puzzle = [];
 const PUZZLECOORD = [
-    [   [[656, 1138], [1059, 1138]],
-        [[857, 919], [857, 1357]],
-        [[656, 1138], [1059, 1138]],
-        [[857, 919], [857, 1357]],
+    [   [[656, 1121], [1089, 1121]],
+        [[877, 913], [877, 1349]],
+        [[656, 1121], [1089, 1121]],
+        [[877, 913], [877, 1349]],
     ],
-    [   [[2512, 1138], [2915, 1138]],
-        [[2713, 919], [2713, 1357]],
-        [[2512, 1138], [2915, 1138]],
-        [[2713, 919], [2713, 1357]],
+    [   [[2545, 1121], [2973, 1121]],
+        [[2757, 913], [2757, 1349]],
+        [[2545, 1121], [2973, 1121]],
+        [[2757, 913], [2757, 1349]],
     ],
-    [   [[3966, 1138], [4369, 1138]],
-        [[4167, 919], [4167, 1357]],
-        [[3966, 1138], [4369, 1138]],
-        [[4167, 919], [4167, 1357]],
+    [   [[4013, 1121], [4441, 1121]],
+        [[4229, 913], [4229, 1349]],
+        [[4013, 1121], [4441, 1121]],
+        [[4229, 913], [4229, 1349]],
     ],
-    [   [[1164, 3537], [1356, 3529], [1365, 3319]],
-        [[1365, 3319], [1356, 3529], [1575, 3537]],
-        [[1575, 3537], [1356, 3529], [1374, 3748]],
-        [[1374, 3748], [1356, 3529], [1164, 3537]],
+    [   [[1181, 3533], [1393, 3533], [1393, 3325]],
+        [[1393, 3325], [1393, 3533], [1609, 3533]],
+        [[1609, 3533], [1393, 3533], [1393, 3745]],
+        [[1393, 3745], [1393, 3533], [1181, 3533]],
     ],
-    [   [[3239, 3537], [3431, 3529], [3440, 3319]],
-        [[3440, 3319], [3431, 3529], [3650, 3537]],
-        [[3650, 3537], [3431, 3529], [3449, 3748]],
-        [[3449, 3748], [3431, 3529], [3239, 3537]],
+    [   [[3285, 3533], [3501, 3533], [3501, 3325]],
+        [[3501, 3325], [3501, 3533], [3713, 3533]],
+        [[3713, 3533], [3501, 3533], [3501, 3745]],
+        [[3501, 3745], [3501, 3533], [3285, 3533]],
     ],
-    [   [[1610, 5420], [2030, 5420]],
-        [[1830, 5201], [1830, 5630]],
-        [[1610, 5420], [2030, 5420]],
-        [[1830, 5201], [1830, 5630]],
+    [   [[1637, 5413], [2069, 5413]],
+        [[1853, 5201], [1853, 5621]],
+        [[1637, 5413], [2069, 5413]],
+        [[1853, 5201], [1853, 5621]],
     ]
 ]
+const LEVEL1 = [[35, 337], [66, 347]];
+const LEVEL2 = [[70, 337], [102, 347]];
+const LEVEL3 = [[0, 0], [656, 871]];
+const LEVEL4 = [[3065, 4668], [4173, 5780]];
+const LEVEL5 = [[100, 100], [200, 200]];
 var fireworks = [];
 const FIREWORKSCOUNT = 5;
 var graph = [];
@@ -217,9 +222,8 @@ function submitAnswer() {
     else {
         if(level == 4) {
             if((puzzle[0]%2) && (puzzle[1]%2) && !(puzzle[2]%2) && (puzzle[3]==1) && !puzzle[4] && (puzzle[5]%2)) {
-                rights++;
-                level++;
-                level4Finished();
+                //level4Finished();
+                nextLevel();
             }
             else {
                 answer = "";
@@ -284,6 +288,7 @@ function initLevel1() {
         questionContent.appendChild(tmp);
     }
     var questionTitle = document.getElementById('questionModalTitle');
+    document.getElementById('questionTitle').textContent = "요일을 찾아라!";
     questionTitle.textContent = "문제 1";
 }
 function initLevel2() {
@@ -306,6 +311,7 @@ function initLevel2() {
     }
     var questionTitle = document.getElementById('questionModalTitle');
     questionTitle.textContent = "문제 2";
+    document.getElementById('questionTitle').textContent = "파티 시작 시간을 찾아라!";
 }
 function initLevel3() {
     wrongs.push('=3=');
@@ -328,6 +334,7 @@ function initLevel3() {
     }
     var questionTitle = document.getElementById('questionModalTitle');
     questionTitle.textContent = "문제 3";
+    document.getElementById('questionTitle').textContent = "인원을 찾아라!";
 }
 function initLevel4() {
     //puzzle using geometrical interpretation of complex number
@@ -352,6 +359,7 @@ function initLevel4() {
     }
     var questionTitle = document.getElementById('questionModalTitle');
     questionTitle.textContent = "문제 4";
+    document.getElementById('questionTitle').textContent = "빛을 되찾아라!";
 }
 function initLevel5() {
     wrongs.push('=5=');
@@ -363,9 +371,9 @@ function initLevel5() {
     ]
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';
-    problem = ["장난스러운 친구가 날린 초대장을 푸느라 고생한 당신! ", "당신은 친구의 어려운 초대장 때문에 고생하고 있는 다른 피해자가 얼마나 있을지 알아볼 필요가 있다.",
-    "사죄의 의미로 소소한 사탕을 돌리기로 결심한 '착한' 당신은 이 파티에 총 몇명이 올지를 알아보자.", "정말 다행히도 친구는 파티 참여 인원를 이진법으로 초대장에 첨부하였다.",
-    "1011(2)"]
+    problem = ["파티를 마치기 위해 폭죽을 터트리려고 한다.", "당신은 파티를 완벽하게 끝내기 위해 줄 하나가 끊어져도 폭죽이 모두 터지도록 하고 싶다",
+    "이것이 가능하도록 폭죽끼리 이어보자.", "폭죽 하나를 클릭한뒤 다른 것을 클릭해서 이을 수 있다.",
+    "(원하는 만큼 이어도 상관없다.)"]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
@@ -373,6 +381,7 @@ function initLevel5() {
     }
     var questionTitle = document.getElementById('questionModalTitle');
     questionTitle.textContent = "문제 5";
+    document.getElementById('questionTitle').textContent = "폭죽을 잘 터트릴 방법을 찾아라!";
 }
 function init() {
     var canvas = document.getElementById('mainCanvas');

@@ -57,8 +57,8 @@ def back_login():
     else:
         return redirect(url_for('login'))
 
-@app.route('/back_logout')
-def back_logout():
+@app.route('/logout')
+def logout():
     del session['name']
     return redirect(url_for('home'))
 
@@ -77,7 +77,7 @@ def room(roomId):
     #session['roomId'] = roomId
     #session['pid'] = pid
     roomDb.uploadPlay(session['name'], int(time.time()))
-    return render_template(f'room{roomId}.html', pid = pid, roomId = roomId)
+    return render_template(f'room{roomId}.html', pid = pid, roomId = roomId, name=session['name'])
 
 @app.route('/back_roomSend', methods=['POST'])
 def back_roomSend():
@@ -101,16 +101,19 @@ def leaderboard():
     roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
     tmp = roomDb.getNSFRWHForAll()
-    tmp.sort(key = lambda x:x[-1])
     for i in range(len(tmp)):
         tmp[i] = list(tmp[i])
         tmp[i].append(getScore(tmp[i][1], tmp[i][2], tmp[i][5], tmp[i][4], tmp[i][3]))
     for i in range(len(tmp)):
         tmp[i][1] = datetime.datetime.fromtimestamp(tmp[i][1])
-        tmp[i][2] = datetime.datetime.fromtimestamp(tmp[i][2])
+    tmp.sort(key = lambda x:-x[-1])
     return render_template('leaderboard.html', things=tmp, thingLen=len(tmp))
 
 def getScore(startTime:int, finishedTime:int, h:str, wrongs:str, right:int):
+    ### for exception
+    if h == "-1": h = "111111111111111"
+    if finishedTime == -1: finishedTime = 1631191336
+    ###
     deltaT = finishedTime - startTime
     wrongs = len(wrongs.split(',')) - (5 if right == 5 else (right + 1))
     ALPHA = 500
@@ -159,4 +162,4 @@ def back_congratulations():
     return redirect(url_for('leaderboard', roomId = roomId))
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=80, debug=True)
+    app.run('0.0.0.0', port=8800, debug=True)

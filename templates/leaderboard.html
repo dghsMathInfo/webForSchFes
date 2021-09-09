@@ -3,54 +3,44 @@
 <head>
     <title>리더보드</title>
 </head>
-<body class="bg-yellow-100">
-    <a href="/">goto home!!</a>
-    <div class="container mt-20 mr-8 ml-8 mb-8 bg-white">
-        <p class="font-black text-yellow-400 text-7xl" style="-webkit-text-stroke: 3px black;">RANK</p>
-        <div class="container mt-20 mr-4 ml-4 mb-4">
-            <table class="table-fixed">
+<body class="bg-blue-50">
+    <div>
+        <a class="underline text-gray-400 text-lg font-light" href="/">홈페이지로 돌아가기</a>
+    </div>
+    <div class="container mt-10 sm:mt-20 sm:mr-8 sm:ml-8 sm:mb-8">
+        <p class="font-black text-gray-600 text-4xl sm:text-7xl">순위</p>
+        <div class="container mt-5 sm:mt-20 sm:mr-4 sm:ml-4 sm:mb-4">
+            <table class="table-fixed w-full">
                 <thead class="w-full">
-                    <th class="w-1/3"></th>
-                    <th class="w-1/3"></th>
-                    <th class="w-1/3"></th>
+                    <th class="w-1/4"></th>
+                    <th class="w-1/2"></th>
+                    <th class="w-1/4"></th>
                 </thead>
                 <tbody>
                     {% for i in range(thingLen)%}
                         {% if i == 0 %}
-                            <tr class="bg-yellow-400">
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px rgb(0, 0, 0);">1</td>
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px rgb(0, 0, 0);">{{things[i][0]}}</td>
-                                <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][6]}}</td>
+                            <tr class="bg-blue-600">
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-left py-2" >1</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-center py-2" >{{things[i][0]}}</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-right py-2">{{things[i][6]}}</td>
                             </tr>
                         {% elif i == 1 %}
-                            <tr class="bg-yellow-300">
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">2</td>
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
-                                <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][6]}}</td>
+                            <tr class="bg-blue-500">
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-left py-2">2</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-center py-2">{{things[i][0]}}</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-right py-2">{{things[i][6]}}</td>
                             </tr>
                         {% elif i == 2 %}
-                            <tr class="bg-yellow-200">
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">3</td>
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
-                                <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][6]}}</td>
+                            <tr class="bg-blue-400">
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-left py-2">3</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-center py-2">{{things[i][0]}}</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-right py-2">{{things[i][6]}}</td>
                             </tr>
                         {% else %}
-                            <tr class="bg-yellow-100">
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{i+1}}</td>
-                                <td class="font-black text-yellow-400 text-3xl text-left" style="-webkit-text-stroke: 3px black;">{{things[i][0]}}</td>
-                                <td class="font-black text-black text-3xl text-center">{{things[i][1]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][2]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][3]}}</td>
-                                <td class="font-black text-black text-3xl text-right">{{things[i][6]}}</td>
+                            <tr class="bg-blue-300">
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-left py-2">{{i+1}}</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-center py-2">{{things[i][0]}}</td>
+                                <td class="font-black text-pink-50 text-lg sm:text-3xl text-right py-2">{{things[i][6]}}</td>
                             </tr>
                         {% endif %}
                     {% endfor %}

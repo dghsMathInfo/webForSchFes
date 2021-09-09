@@ -7,15 +7,20 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/javascript">
+        BGCOLOR = "rgb(70, 70, 70)";
+        function copeWithHint() {
+            showHintModal();
+            hintClick(0);
+        }
         function initLevel1_cli() {
-            const REALWIDTH = 1000, REALHEIGHT = 750;
+            const REALWIDTH = 501, REALHEIGHT = 595;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.fillStyle = "gray";
+            ctx.fillStyle = BGCOLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='invitation.png')}}";
@@ -28,32 +33,58 @@
                     var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
                     ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
                 }
-                ctx.rect(100, 100, 100, 100);
-                ctx.fillStyle = "red";
-                ctx.fill();
-                ctx.rect(400, 400, 100, 100);
-                ctx.fillStyle = "blue";
-                ctx.fill();
             }
             canvas.addEventListener('click', function (event) {
                 if(level != 1) return;
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
-                if (isInRectangle(x, y, 100, 100, 100, 100)) {
+                var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
+                if (isInRectangle(tmp[0], tmp[1], LEVEL1[0][0], LEVEL1[0][1], Math.abs(LEVEL1[0][0] - LEVEL1[1][0]), Math.abs(LEVEL1[0][1] - LEVEL1[1][1]))) {
                     showQuestionModal();
                 }
-                if (isInRectangle(x, y, 400, 400, 100, 100)) {
-                    showHintModal();
-                    hintClick(0);
-                }
                 console.log('x y ' + x + ' ' + y);
-                var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
                 console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
                 console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT));
             })
             initLevel1();
         }
         function initLevel2_cli() {
+            const REALWIDTH = 501, REALHEIGHT = 595;
+            var canvas = document.getElementById('mainCanvas');
+            var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
+            var canvasTop = canvas.offsetTop + canvas.clientTop;
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.fillStyle = BGCOLOR;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            var img = new Image();
+            img.src = "{{url_for('static', filename='invitation.png')}}";
+            img.onload = function () {
+                if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
+                    var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
+                    ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                }
+                else {
+                    var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
+                    ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                }
+            }
+            canvas.addEventListener('click', function (event) {
+                if(level != 2) return;
+                var x = event.pageX - canvasLeft;
+                var y = event.pageY - canvasTop;
+                var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
+                if (isInRectangle(tmp[0], tmp[1], LEVEL2[0][0], LEVEL2[0][1], Math.abs(LEVEL2[0][0] - LEVEL2[1][0]), Math.abs(LEVEL2[0][1] - LEVEL2[1][1]))) {
+                    showQuestionModal();
+                }
+                console.log('x y ' + x + ' ' + y);
+                console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
+                console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT));
+            })
+            initLevel2();
+        }
+        function initLevel3_cli() {
             const REALWIDTH = 656, REALHEIGHT = 871;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
@@ -61,8 +92,6 @@
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.fillStyle = "gray";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='howmany.png')}}";
             img.onload = function () {
@@ -74,49 +103,23 @@
                     var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
                     ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
                 }
-                ctx.rect(100, 100, 100, 100);
-                ctx.fillStyle = "red";
-                ctx.fill();
-                ctx.rect(400, 400, 100, 100);
-                ctx.fillStyle = "blue";
-                ctx.fill();
             }
-            canvas.addEventListener('click', function (event) {
-                if(level != 2) return;
-                var x = event.pageX - canvasLeft;
-                var y = event.pageY - canvasTop;
-                if (isInRectangle(x, y, 100, 100, 100, 100)) {
-                    showQuestionModal();
-                }
-                if (isInRectangle(x, y, 400, 400, 100, 100)) {
-                    showHintModal();
-                    hintClick(0);
-                }
-            })
-            initLevel2();
-        }
-        function initLevel3_cli() {
-            var canvas = document.getElementById('mainCanvas');
-            var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
-            var canvasTop = canvas.offsetTop + canvas.clientTop;
-            var ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.beginPath();
-            b = [false, false, false, false, false, false];
+            /*b = [false, false, false, false, false, false];
             for (var i = 0; i < 5; i++) {
                 ctx.rect(i * 100, 0, 100, 100);
                 ctx.fillStyle = (b[i]) ? "red" : "blue";
                 ctx.fill();
             }
             ctx.fillStyle = "green";
-            ctx.fillRect(5 * 100, 0, 100, 100);
+            ctx.fillRect(5 * 100, 0, 100, 100);*/
             canvas.addEventListener('click', function (event) {
                 if(level != 3) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
-                for (var i = 0; i < 5; i++) {
+                
+                /*for (var i = 0; i < 5; i++) {
                     if (isInRectangle(x, y, i*100, 0, 100, 100)) {
                         b[i] = !b[i];
                         console.log('b ' + i + " " + b[i]);
@@ -133,14 +136,26 @@
                 ctx.fillRect(5 * 100, 0, 100, 100);
                 ctx.fillStyle = "blue";
                 ctx.fillRect(100, 100, 100, 100);
-                ctx.fillRect(400, 400, 100, 100);
-                if (isInRectangle(x, y, 100, 100, 100, 100)) {
+                ctx.fillRect(400, 400, 100, 100);*/
+                var img = new Image();
+                img.src = "{{url_for('static', filename='howmany.png')}}";
+                img.onload = function () {
+                    if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
+                        var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
+                        ctx.drawImage(img, 0, (canvas.getBoundingClientRect().height - imgHeight)/2, imgWidth, imgHeight);
+                    }
+                    else {
+                        var imgWidth = canvas.getBoundingClientRect().height*(REALWIDTH/REALHEIGHT), imgHeight = canvas.getBoundingClientRect().height;
+                        ctx.drawImage(img, (canvas.getBoundingClientRect().width - imgWidth)/2, 0, imgWidth, imgHeight);
+                    }
+                }
+                var tmp = rawCoordToImgCoord(x, y, canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT);
+                if (isInRectangle(tmp[0], tmp[1], LEVEL3[0][0], LEVEL3[0][1], Math.abs(LEVEL3[0][0] - LEVEL3[1][0]), Math.abs(LEVEL3[0][1] - LEVEL3[1][1]))) {
                     showQuestionModal();
                 }
-                if (isInRectangle(x, y, 400, 400, 100, 100)) {
-                    showHintModal();
-                    hintClick(0);
-                }
+                console.log('x y ' + x + ' ' + y);
+                console.log('rawC2imgC ' + tmp[0] + ' ' + tmp[1]);
+                console.log('imgC2rawC ' + imgCoordToRawCoord(tmp[0], tmp[1], canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height, REALWIDTH, REALHEIGHT));
             })
             initLevel3();
         }
@@ -155,7 +170,7 @@
         }
 
         function initLevel4_cli() {
-            const REALWIDTH = 4464, REALHEIGHT = 7968;
+            const REALWIDTH = 4464, REALHEIGHT = 7968, LINEWIDTH = 3.8;
             var canvas = document.getElementById('mainCanvas');
             let CW = canvas.getBoundingClientRect().width, CH = canvas.getBoundingClientRect().height;
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
@@ -163,7 +178,7 @@
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.fillStyle = "gray";
+            ctx.fillStyle = BGCOLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='map_level4.png')}}";
@@ -180,24 +195,27 @@
                     if(PUZZLECOORD[i][puzzle[i]].length == 2) {
                         var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
+                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), LINEWIDTH);
                     }
                     else {
                         var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), 5);
-                        drawLine(ctx, Math.min(tmp2[0], tmp3[0]), Math.min(tmp2[1], tmp3[1]), Math.max(tmp2[0], tmp3[0]), Math.max(tmp2[1], tmp3[1]), 5);
+                        drawLine(ctx, Math.min(tmp1[0], tmp2[0]), Math.min(tmp1[1], tmp2[1]), Math.max(tmp1[0], tmp2[0]), Math.max(tmp1[1], tmp2[1]), LINEWIDTH);
+                        drawLine(ctx, Math.min(tmp2[0], tmp3[0]), Math.min(tmp2[1], tmp3[1]), Math.max(tmp2[0], tmp3[0]), Math.max(tmp2[1], tmp3[1]), LINEWIDTH);
                     }
                 }
+                ctx.fillStyle = "green";
+                var tmp1 = imgCoordToRawCoord(LEVEL4[0][0], LEVEL4[0][1], CW, CH, REALWIDTH, REALHEIGHT);
+                var tmp2 = imgCoordToRawCoord(LEVEL4[1][0], LEVEL4[1][1], CW, CH, REALWIDTH, REALHEIGHT);
+                ctx.fillRect(tmp1[0], tmp1[1], Math.abs(tmp1[0] - tmp2[0]), Math.abs(tmp1[1] - tmp2[1]));
             }
-            ctx.fillStyle = "green";
-            ctx.fillRect(5 * 100, 0, 100, 100);
+            showQuestionModal();
             canvas.addEventListener('click', function (event) {
                 if(level != 4) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
-                ctx.fillStyle = "gray";
+                ctx.fillStyle = BGCOLOR;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 if(CW*REALHEIGHT < CH*REALWIDTH) {
                     var imgWidth = CW, imgHeight = CW*(REALHEIGHT/REALWIDTH);
@@ -228,16 +246,21 @@
                     if(PUZZLECOORD[i][puzzle[i]].length == 2) {
                         var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 5);
+                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], LINEWIDTH);
                     }
                     else {
                         var tmp1 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][0][0], PUZZLECOORD[i][puzzle[i]][0][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp2 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][1][0], PUZZLECOORD[i][puzzle[i]][1][1], CW, CH, REALWIDTH, REALHEIGHT);
                         var tmp3 = imgCoordToRawCoord(PUZZLECOORD[i][puzzle[i]][2][0], PUZZLECOORD[i][puzzle[i]][2][1], CW, CH, REALWIDTH, REALHEIGHT);
-                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], 5);
-                        drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1], 5);
+                        drawLine(ctx, tmp1[0], tmp1[1], tmp2[0], tmp2[1], LINEWIDTH);
+                        drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1], LINEWIDTH);
                     }
                 }
+                if(isInRectangle(tmp[0], tmp[1], LEVEL4[0][0], LEVEL4[0][1], Math.abs(LEVEL4[0][0] - LEVEL4[1][0]), Math.abs(LEVEL4[0][1] - LEVEL4[1][1]))) submitAnswer();
+                ctx.fillStyle = "green";
+                var tmp1 = imgCoordToRawCoord(LEVEL4[0][0], LEVEL4[0][1], CW, CH, REALWIDTH, REALHEIGHT);
+                var tmp2 = imgCoordToRawCoord(LEVEL4[1][0], LEVEL4[1][1], CW, CH, REALWIDTH, REALHEIGHT);
+                ctx.fillRect(tmp1[0], tmp1[1], Math.abs(tmp1[0] - tmp2[0]), Math.abs(tmp1[1] - tmp2[1]));
             })
             initLevel4();
         }
@@ -267,6 +290,7 @@
         }
 
         function initLevel5_cli() {
+            const XSIZE = 100, YSIZE = 100;
             var canvas = document.getElementById('mainCanvas');
             let CW = canvas.getBoundingClientRect().width, CH = canvas.getBoundingClientRect().height;
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
@@ -276,13 +300,19 @@
             ctx.beginPath();
             fireworks = [];
             graph = [];
-            ctx.fillStyle = "blue";
-            for(var i = 0; i < 5; i++) {
-                fireworks.push([Math.floor(Math.random()*(CW/2)), Math.floor(Math.random()*(CH/2))]);
-                ctx.fillRect(fireworks[i][0], fireworks[i][1], 100, 100);
+            ctx.fillStyle = "green";
+            var img = new Image();
+            img.src = "{{url_for('static', filename='confetti.png')}}";
+            img.onload = function() {
+                for(var i = 0; i < 5; i++) {
+                    fireworks.push([Math.floor(Math.random()*(CW/2)), Math.floor(Math.random()*(CH/2))]);
+                    ctx.drawImage(img, fireworks[i][0], fireworks[i][1], XSIZE, YSIZE);
+                }
+                ctx.fillRect(LEVEL5[0][0], LEVEL5[0][1], Math.abs(LEVEL5[0][0] - LEVEL5[1][0]), Math.abs(LEVEL5[0][1] - LEVEL5[1][1]));
             }
             focusing = false;
             focused = -1;
+            showQuestionModal();
             canvas.addEventListener('click', function (event) {
                 if(level != 5) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -292,7 +322,7 @@
                 console.log('x y ' + x + ' ' + y);
                 var clicked = -1;
                 for(var i = 0; i < FIREWORKSCOUNT; i++) {
-                    if(isInRectangle(x, y, fireworks[i][0], fireworks[i][1], 100, 100)) {
+                    if(isInRectangle(x, y, fireworks[i][0], fireworks[i][1], XSIZE, YSIZE)) {
                         clicked = i;
                         console.log(clicked);
                         break;
@@ -312,13 +342,14 @@
                         focused = clicked;
                     }
                 }
-                ctx.fillStyle = "blue";
                 for(var i = 0; i < fireworks.length; i++) {
-                    ctx.fillRect(fireworks[i][0], fireworks[i][1], 100, 100);
+                    ctx.drawImage(img, fireworks[i][0], fireworks[i][1], XSIZE, YSIZE);
                 }
                 for(var i = 0; i < graph.length; i++) {
-                    drawLine(ctx, fireworks[graph[i][0]][0], fireworks[graph[i][0]][1], fireworks[graph[i][1]][0], fireworks[graph[i][1]][1], 6);
+                    drawLine(ctx, fireworks[graph[i][0]][0] + XSIZE/2, fireworks[graph[i][0]][1] + YSIZE/2, fireworks[graph[i][1]][0] + XSIZE/2, fireworks[graph[i][1]][1] + YSIZE/2, 6);
                 }
+                if(isInRectangle(x, y, LEVEL5[0][0], LEVEL5[0][1], Math.abs(LEVEL5[0][0] - LEVEL5[1][0]), Math.abs(LEVEL5[0][1] - LEVEL5[1][1]))) submitAnswer();
+                ctx.fillRect(LEVEL5[0][0], LEVEL5[0][1], Math.abs(LEVEL5[0][0] - LEVEL5[1][0]), Math.abs(LEVEL5[0][1] - LEVEL5[1][1]));
             })
             initLevel5();
         }
@@ -332,7 +363,6 @@
 </head>
 
 <body>
-    <script>0</script>
     <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
         id="questionModal" style="display: none;">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -351,15 +381,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div class="bg-blue-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <div class="grid-cols-2 w-full">
                         <div class="row-span-2">
                             <label id="answerLabel" class="text-xl text-gray-500">답</label>
-                            <input id="answer" class="w-full justify-center rounded-md shadow-sm ring-2">
+                            <input id="answer" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin">
                         </div>
                         <div class="row-span-2 justify-end">
                             <button type="button" id="answerBtn"
-                                class="w-full inline-flex justify-end rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white text-black py-1 px-4"
                                 onclick="submitAnswer();">
                                 답안 입력
                             </button>
@@ -402,7 +432,7 @@
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button type="button"
-                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 sm:ml-3 sm:w-auto sm:text-sm"
+                    class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white text-black py-1 px-4"
                         onclick="hintClick(1)">
                         다음 힌트
                     </button>
@@ -425,19 +455,23 @@
         <input type="hidden" id="wrongs" name="wrongs" value="000000000000000">
         <input type="hidden" id="h" name="h" value="">
     </div>
+    <div name="header">
+        <div class="underline text-gray-400 text-sm sm:text-lg font-light">
+            <div class="flex justify-between">
+                <div class="justify-start">
+                    <p>{{name}}</p>
+                </div>
+                <div class="text-center">
+                    <p class="no-underline text-gray-700 text-2xl font-medium" id="questionTitle"></p>
+                </div>
+                <div class="justify-center">
+                    <button class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white px-1 sm:py-1 sm:px-4" onclick="copeWithHint();">힌트 보기</button>
+                </div>
+                <div class="justify-end text-right">
+                    <a href="/logout">로그아웃</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <canvas id="mainCanvas" width="10" height="10"></canvas>
-    <!--<button onclick="init();">Start!</button>
-    <button onclick="initLevel1_cli();">Start2!</button>-->
-
-    <!--
-    <button id="hint1" onclick='hintClick("hint1");'>힌트1</button>
-    <button id="hint2" onclick='hintClick("hint2");'>힌트2</button>
-    <button id="hint1" onclick='hintClick("hint3");'>힌트3</button>
-    <button id="hint2" onclick='hintClick("hint4");'>힌트4</button>
-    <button id="hint2" onclick='hintClick("hint5");'>힌트5</button>
-    <button id="pro1" onclick='proClick("pro1");'>문제1</button>
-    <button id="pro2" onclick='proClick("pro2");'>문제2</button>
-    <button id="pro1" onclick='proClick("pro3");'>문제3</button>
-    <button id="pro2" onclick='proClick("pro4");'>문제4</button>
-    <button id="pro2" onclick='proClick("pro5");'>문제5</button>-->
 </body>

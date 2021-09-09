@@ -3,7 +3,33 @@
 <head>
     <title>home</title>
 </head>
-<body>
-    <p>{{name}}</p>
-    <a href="/room/1">방 1</a>
+<body class="bg-blue-50">
+    <div name="header">
+        <div class="underline grid grid-cols-2 text-gray-400 text-lg font-light">
+            <div class="justify-start">
+                <p>{{name}}</p>
+            </div>
+            <div class="justify-end text-right">
+                <a href="/logout">로그아웃</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center mt-10 sm:mt-15">
+        <a href="/room/1">
+            <div name="body" class="justify-center px-20 sm:py-12">
+                <div class="relative px-4 py-10 bg-blue-300 shadow-2xl place-content-start rounded-3xl ">
+                    <p class="text-gray-700 font-sans text-2xl font-black sm:text-5xl">방 1</p>
+                    <div class="mt-3">
+                        <p class="text-gray-600 font-sans text-xl sm:text-3xl mb-1">문제 유형</p>
+                        <div class="text-gray-500 font-sans text-lg font-light sm:text-2xl">
+                            <p>문제적 남자 스타일의 문제</p>
+                            <p>진법변환</p>
+                            <p>논리 게이트</p>
+                            <p>그래프</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
 </body>

@@ -108,7 +108,7 @@ class Room:
         tmp = self.c.fetchone()
         return 1 if tmp == None else tmp[0] + 1
 
-    def getNSFRWHForAll(self) -> typing.List: #get Name, startTime, finishedTime, rights
+    def getNSFRWHForAll(self) -> typing.List: #get Name, startTime, finishedTime, rights, wrongs, h
         query = f'SELECT name, startTime, finishedTime, rights, wrongs, h FROM Room_{self.roomId}'
         self.c.execute(query)
         self.conn.commit()
