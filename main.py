@@ -162,4 +162,4 @@ def back_congratulations():
     return redirect(url_for('leaderboard', roomId = roomId))
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=8800, debug=True)
+    app.run('0.0.0.0', port=80, debug=True)
