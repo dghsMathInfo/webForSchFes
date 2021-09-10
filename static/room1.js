@@ -278,9 +278,9 @@ function initLevel1() {
     "과거는 저기너머에 두고 당신의 절친한 친구를 위해 문제를 풀어 홈파티에 참여하자.", "a. 홈파티는 수요일에 시작한다.", "b. 홈파티는 목요일에 시작한다.", "c. 홈파티는 금요일에 시작한다.", 
     "d. 홈파티는 토요일에 시작한다.", "e. 홈파티는 일요일에 시작한다."]
     hint = [
-        ["h1"],
-        ["h2"],
-        ["h3"]
+        ["참인 명제가 두 개인 경우, 거짓이 된다. "],
+        ["대화에서 언급된 요일 중 한 번만 언급된 요일을 찾는다"],
+        ["정답 : 일요일"]
     ]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
@@ -295,9 +295,9 @@ function initLevel2() {
     wrongs.push('=2=');
     prevHintRank = -1;
     hint = [
-        ["h1"],
-        ["h2"],
-        ["h3"]
+        ["사칙연산을 이용해보자."],
+        ["뺄셈과 덧셈을 이용해보자힌트"],
+        ["정답: 4시 10분 (410)"]
     ]
     level = 2;
     var questionContent = document.getElementById('questionModalContent');
@@ -317,9 +317,9 @@ function initLevel3() {
     wrongs.push('=3=');
     prevHintRank = -1;
     hint = [
-        ["h1"],
-        ["h2"],
-        ["h3"]
+        ["2진법의 각 자리수는 2에 0제곱, 2에 1제곱, 2에 2제곱, 2에 3제곱이다. (1001(2진법) -> 9(10진법))"],
+        ["1101 = 2에0제곱 + 2에2제곱 + 2에3제곱"],
+        ["정답: 13명"]
     ]
     level = 3;
     var questionContent = document.getElementById('questionModalContent');
