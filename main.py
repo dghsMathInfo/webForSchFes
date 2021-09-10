@@ -143,7 +143,8 @@ def back_survey():
     survyed = 1
     userDb = Data.UserDb()
     userDb.updateUser(session['name'], mbti, recentMathPCnt, rateOfLikingMath, mostLikeMathField, survyed)
-    return redirect(f'/room/{roomId}')
+    #return redirect(f'/room/{roomId}')
+    return redirect(f'/room/1')
 
 @app.route('/congratulations', methods=['GET'])
 def congratulations():
