@@ -18,8 +18,7 @@
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
             var ctx = canvas.getContext('2d');
-            ctx.fillStyle = "rgba(0, 0, 0, 0)";
-            ctx.fillRect(left, top, width, height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
             ctx.fillStyle = BGCOLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -55,8 +54,7 @@
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
             var ctx = canvas.getContext('2d');
-            ctx.fillStyle = "rgba(0, 0, 0, 0)";
-            ctx.fillRect(left, top, width, height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
             ctx.fillStyle = BGCOLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -92,8 +90,7 @@
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
             var ctx = canvas.getContext('2d');
-            ctx.fillStyle = "rgba(0, 0, 0, 0)";
-            ctx.fillRect(left, top, width, height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
             var img = new Image();
             img.src = "{{url_for('static', filename='howmany.png')}}";
@@ -117,8 +114,7 @@
             ctx.fillRect(5 * 100, 0, 100, 100);*/
             canvas.addEventListener('click', function (event) {
                 if(level != 3) return;
-                ctx.fillStyle = "rgba(0, 0, 0, 0)";
-                ctx.fillRect(left, top, width, height);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
@@ -180,8 +176,7 @@
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
             var ctx = canvas.getContext('2d');
-            ctx.fillStyle = "rgba(0, 0, 0, 0)";
-            ctx.fillRect(left, top, width, height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
             ctx.fillStyle = BGCOLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -218,8 +213,7 @@
             showQuestionModal();
             canvas.addEventListener('click', function (event) {
                 if(level != 4) return;
-                ctx.fillStyle = "rgba(0, 0, 0, 0)";
-                ctx.fillRect(left, top, width, height);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
                 ctx.fillStyle = BGCOLOR;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -302,8 +296,7 @@
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
             var ctx = canvas.getContext('2d');
-            ctx.fillStyle = "rgba(0, 0, 0, 0)";
-            ctx.fillRect(left, top, width, height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
             fireworks = [];
             graph = [];
@@ -322,8 +315,7 @@
             showQuestionModal();
             canvas.addEventListener('click', function (event) {
                 if(level != 5) return;
-                ctx.fillStyle = "rgba(0, 0, 0, 0)";
-                ctx.fillRect(left, top, width, height);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.beginPath();
                 var x = event.pageX - canvasLeft;
                 var y = event.pageY - canvasTop;
