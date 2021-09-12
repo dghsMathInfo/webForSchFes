@@ -79,7 +79,6 @@ function hintClick(next) {
         MathJax.typeset();
     }
     else {
-        sendInfo();
         if(prevHintRank == 2) {
             alert("마지막 힌트입니다!");
             
@@ -96,6 +95,7 @@ function hintClick(next) {
             }
             MathJax.typeset();
         }
+        sendInfo();
     }
     document.getElementById('modal-title').textContent = "Hint " + (prevHintRank + 1);
     return;
@@ -317,14 +317,15 @@ function initLevel2() {
     questionContent.innerHTML = '';
     var questionLetterContent = document.getElementById('questionModalLetterContent');
     questionLetterContent.innerHTML = '';
-    letter = []
+    letter = ["아까 문제는 어려웠지?", "이번엔 조금 나을거야.", "포기하지 말고 홈파티에 꼭 와줘!", "\\(5+3=28\\)", 
+    "\\(7+4=311\\)", "\\(3+2=15\\)", "\\(5+4=p\\)"]
     for(var i = 0; i < letter.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = letter[i];
         questionLetterContent.appendChild(tmp);
     }
-    problem = ["친구가 다음과 같은 식을 초대장에 첨부해서 홈파티를  몇시에 하는지 알려주었다.", "장난스러운 친구를 가진 당신은, 그런 친구를 가진 당신의 업보라 여기고 문제를 만든 친구의 정성을 봐서라도 다음과 같은 문제를 풀자.",
-    "5+3 = 28", "7 + 4 = 311", "3 + 2 = 15", "5 + 4 = p", "p시에 열린다.(p만 입력)"]
+    problem = ["친구는 짧은 메세지와 함께 또 다른 문제를 첨부하였습니다. ", "아래 식을 보고 친구의 문제를 풀어 홈파티에 참여합시다.",
+    "홈파티는 \\(p\\)시에 열린다고 합니다. 몇시에 열릴까요?(\\(p\\)만 입력)"]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
