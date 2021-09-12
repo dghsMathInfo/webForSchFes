@@ -71,7 +71,7 @@ def home():
 def room(roomId):
     userDb = Data.UserDb()
     if not userDb.isUserExist(session['name']): return redirect(url_for('signupName'))
-    if not userDb.getSurvyed(session['name']): return redirect(url_for('survey'), roomId=roomId)
+    if not userDb.getSurvyed(session['name']): return redirect(url_for('survey', roomId=roomId))
 
     roomDb = Data.Room(roomId)
     pid = roomDb.getNextPid()
