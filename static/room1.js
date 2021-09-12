@@ -272,7 +272,6 @@ function submitAnswer() {
             }
         }
     }
-    sendInfo();
     return;
 }
 function initLevel1() {
