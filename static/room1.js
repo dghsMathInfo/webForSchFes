@@ -103,7 +103,6 @@ function hintClick(next) {
 function end() {
     // finishedTime, rights, wrongs
     sendInfo();
-    window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1";
 }
 
 function sendInfo() {
@@ -131,6 +130,9 @@ function sendInfo() {
     xhr.open('POST', '/back_roomSend');
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.send(JSON.stringify(data));
+    xhr.onload = function() {
+       if(rights == 5) window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1";
+    }
 }
 
 function showQuestionModal() {
