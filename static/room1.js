@@ -130,9 +130,7 @@ function sendInfo() {
     xhr.open('POST', '/back_roomSend', false);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.send(JSON.stringify(data));
-    xhr.onload = function() {
-       if(rights == 5) window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1";
-    }
+    if(rights == 5) window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1";
 }
 
 function showQuestionModal() {
@@ -229,8 +227,8 @@ function submitAnswer() {
     else {
         if(level == 4) {
             if((puzzle[0]%2) && (puzzle[1]%2) && !(puzzle[2]%2) && (puzzle[3]==1) && !puzzle[4] && (puzzle[5]%2)) {
-                level4Finished();
-                // nextLevel();
+                //level4Finished();
+                nextLevel();
             }
             else {
                 answer = "";
