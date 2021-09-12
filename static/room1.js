@@ -387,8 +387,8 @@ function initLevel4() {
     ]
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';
-    problem = ["즐겁게 파티를 하고 있는 도중, 갑작스럽게 불이 꺼졌다.", "이대로 가면 친구가 욕먹는 것은 뻔하다.",
-    "사실 그것도 나쁘진 않지만 일단 불을 켜보자."]
+    problem = ["즐겁게 파티를 하고 있는 도중 갑작스럽게 불이 꺼졌습니다.", "이대로가면 친구가 욕을 먹는다는 장점이 있지만, ",
+    "일단 파티를 다시 이어가기 위해 전기 회로를 고쳐봅시다."]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
@@ -408,9 +408,8 @@ function initLevel5() {
     ]
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';
-    problem = ["파티를 마치기 위해 폭죽을 터트리려고 한다.", "당신은 파티를 완벽하게 끝내기 위해 줄 하나가 끊어져도 폭죽이 모두 터지도록 하고 싶다",
-    "이것이 가능하도록 폭죽끼리 이어보자.", "폭죽 하나를 클릭한뒤 다른 것을 클릭해서 이을 수 있다.",
-    "(원하는 만큼 이어도 상관없다.)"]
+    problem = ["당신은 파티를 신나게 마무리하기 위해 폭죽을 한번에 터트리려고 합니다.", "혹시라도 줄 하나가 끊어져도 폭죽이 모두 터지도록 폭죽을 연결해봅시다.",
+    "폭죽 하나를 클릭한 뒤 다른 것을 클릭해서 이을 수 있습니다.", "최대 " +(FIREWORKSCOUNT +1) + "개의 줄을 사용할 수 있습니다."]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
