@@ -44,6 +44,7 @@ const LEVEL2 = [[70, 337], [102, 347]];
 const LEVEL3 = [[0, 0], [656, 871]];
 const LEVEL4 = [[3065, 4668], [4173, 5780]];
 const LEVEL5 = [[100, 100], [200, 200]];
+const LEVEL5_2 = [[300, 300], [400, 400]];
 var fireworks = [];
 const FIREWORKSCOUNT = 5;
 var graph = [];
@@ -74,6 +75,7 @@ function hintClick(next) {
             }
         }
         hintContent.appendChild(tmp);
+        MathJax.typeset();
     }
     else {
         sendInfo();
@@ -91,6 +93,7 @@ function hintClick(next) {
                 tmp.textContent = hint[prevHintRank][i];
                 hintContent.appendChild(tmp);
             }
+            MathJax.typeset();
         }
     }
     document.getElementById('modal-title').textContent = "Hint " + (prevHintRank + 1);
@@ -317,8 +320,14 @@ function initLevel3() {
     wrongs.push('=3=');
     prevHintRank = -1;
     hint = [
-        ["2진법의 각 자리수는 2에 0제곱, 2에 1제곱, 2에 2제곱, 2에 3제곱이다. (1001(2진법) -> 9(10진법))"],
-        ["1101 = 2에0제곱 + 2에2제곱 + 2에3제곱"],
+        ["2진법의 각 자리수는 \\(2^0\\), \\(2^1\\), \\(2^2\\), \\(2^3\\)이다. (1001(2진법) -> 9(10진법))"],
+        ["\\(\\begin{align} \
+            1101_(2) = &1 \\times 2^3 \\\\ \
+                    + &1 \\times 2^2 \\\\ \
+                    + &0 \\times 2^1 \\\\ \
+                    + &1 \\times 2^0 \\\\ \
+                    = &11_(10) \
+            \\end{align}\\)"],
         ["정답: 13명"]
     ]
     level = 3;

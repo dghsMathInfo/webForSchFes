@@ -1,3 +1,4 @@
+from os import name
 from flask import Flask, request, render_template, redirect, url_for, session
 import Data
 import time
@@ -34,11 +35,13 @@ def back_signupSid():
     studentId = request.form['studentId']
     userDb = Data.UserDb()
     userDb.uploadUser(name, int(studentId))
-    return redirect(url_for('login'))
+    return redirect(url_for('login',re=0))
 
-@app.route('/login')
+@app.route('/login', methods=["GET"])
 def login():
-    return render_template('login.html')
+    re = request.args.get('re')
+    if re == None: re = 0
+    return render_template('login.html',re=re)
 
 @app.route('/back_login', methods=['POST'])
 def back_login():
@@ -46,16 +49,13 @@ def back_login():
     studentId = int(request.form['studentId'])
     print(name, studentId)
     userDb = Data.UserDb()
+    if not userDb.isUserExist(name): return redirect(url_for('login', re=1))
     tmp = userDb.getStudentId(name)
-    if tmp != None:
-        print(type(tmp), type(studentId))
-        if tmp == studentId:
-            session['name'] = name
-            return redirect(url_for('home'))
-        else:
-            return redirect(url_for('login'))
+    if tmp == studentId:
+        session['name'] = name
+        return redirect(url_for('home'))
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login', re=2))
 
 @app.route('/logout')
 def logout():
@@ -64,13 +64,13 @@ def logout():
 
 @app.route('/')
 def home():
-    if not 'name' in session: return redirect(url_for('login'))
+    if not 'name' in session: return redirect(url_for('login', re = 0))
     return render_template('home.html', name = session['name'])
 
 @app.route('/room/<roomId>')
 def room(roomId):
     userDb = Data.UserDb()
-    if not userDb.getSurvyed(session['name']): return redirect(url_for('survey', roomId = roomId))
+    if not userDb.getSurvyed(session['name']): return redirect(url_for('survey'), roomId=roomId)
 
     roomDb = Data.Room(roomId)
     pid = roomDb.getNextPid()
@@ -96,11 +96,18 @@ def back_roomSend():
     roomDb.updatePlay(pid, finishedTime, device, rights, wrongs, rateOfRecommendation, recommended, h)
     return redirect(url_for('congratulations', roomId=roomId, pid=pid))
 
-@app.route('/leaderboard')
+@app.route('/leaderboard', methods=['GET'])
 def leaderboard():
     roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
     tmp = roomDb.getNSFRWHForAll()
+    d = []
+    for i in range(len(tmp)):
+        if tmp[i][3] != 5:
+            d.append(i)
+    for i in range(len(d)):
+        del tmp[d[i] - i]
+
     for i in range(len(tmp)):
         tmp[i] = list(tmp[i])
         tmp[i].append(getScore(tmp[i][1], tmp[i][2], tmp[i][5], tmp[i][4], tmp[i][3]))
@@ -139,12 +146,11 @@ def back_survey():
     recentMathPCnt = request.form['recentMathPCnt']
     rateOfLikingMath = request.form['rateOfLikingMath']
     mostLikeMathField = request.form['mostLikeMathField']
-    roomId = request.form['roomId']
+    roomId = 1#request.form['roomId']
     survyed = 1
     userDb = Data.UserDb()
     userDb.updateUser(session['name'], mbti, recentMathPCnt, rateOfLikingMath, mostLikeMathField, survyed)
-    #return redirect(f'/room/{roomId}')
-    return redirect(f'/room/1')
+    return redirect(f'/room/{roomId}')
 
 @app.route('/congratulations', methods=['GET'])
 def congratulations():

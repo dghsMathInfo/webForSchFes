@@ -35,7 +35,7 @@ class UserDb:
         self.c.execute(query)
         self.conn.commit()
 
-    def isUerExist(self, name:str) -> bool:
+    def isUserExist(self, name:str) -> bool:
         query = f'SELECT studentId FROM User WHERE name = "{name}"'
         self.c.execute(query)
         self.conn.commit()

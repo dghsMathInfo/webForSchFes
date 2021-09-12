@@ -2,6 +2,26 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <head>
     <title>축하합니다!</title>
+    <script>
+        /*
+        function forEtc() {
+            var select = document.getElementById('select');
+            var item = select.options[select.selectedIndex].value;
+            if(item == -1) {
+                document.getElementById('etc').setAttribute('style', 'display: block;');
+            }
+            else {
+                document.getElementById('etc').setAttribute('style', 'display: none;');
+            }
+        }
+        function submit() {
+            var select = document.getElementById('select');
+            var item = select.options[select.selectedIndex].value;
+            if(item == -1) {
+                select.options[select.selectedIndex].value = document.getElementById('etc').value;
+            }
+        }*/
+    </script>
 </head>
 <body class="bg-blue-50">
     <div class="flex justify-center mt-10 sm:mt-15">
@@ -12,17 +32,19 @@
     <div class="flex justify-center mt-10 sm:mt-15">
         <div class="flex justify-center p-30 text-gray-500 text-xl ">
             <div>
-                <form action="/back_congratulations" method="POST">
+                <form action="/back_congratulations" method="POST" onsubmit="submit();">
                     <input type="hidden" id="pid" name="pid" value="{{pid}}">
                     <input type="hidden" id="roomId" name="roomId" value="{{roomId}}">
                     <p>추천하고 싶은 정도</p>
                     <input type="number" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="rateOfRecommendation" name="rateOfRecommendation" value="">
                     <p class="pt-3">플레이 한 이유</p>
-                    <select type="number" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="recommended" name="recommended">
+                    <select id="select" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="recommended" name="recommended"><!--onchange="forEtc();">--> 
                         <option value="0">그냥 하고 싶어서</option>
                         <option value="1">친구의 추천으로</option>
                         <option value="2">선/후배의 추천으로</option>
+                        <option value="-1" id="etc">기타</option>
                     </select>
+                    <!--<input class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="etc" style="display: none;">-->
                     <div class="flex mt-3 justify-center pt-3"><input type="submit" value="확인" class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white text-black py-1 px-4"></div>
                 </form>
             </div>
