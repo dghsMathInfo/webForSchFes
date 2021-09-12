@@ -127,7 +127,7 @@ function sendInfo() {
     data.h = hText;
     
     var xhr = new XMLHttpRequest;
-    xhr.open('POST', '/back_roomSend');
+    xhr.open('POST', '/back_roomSend', false);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.send(JSON.stringify(data));
     xhr.onload = function() {
