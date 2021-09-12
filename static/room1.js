@@ -374,6 +374,7 @@ function initLevel3() {
         tmp.textContent = problem[i];
         questionContent.appendChild(tmp);
     }
+    MathJax.typeset();
     var questionTitle = document.getElementById('questionModalTitle');
     questionTitle.textContent = "문제 3";
     document.getElementById('questionTitle').textContent = "인원을 찾아라!";
