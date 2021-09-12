@@ -1,10 +1,10 @@
 var rights = 0, easterEggs = 0;
-var hints = [];
+var hint = [];
 var h = [];
 var letter = [];
 var wrongs = [];
 var answerIsText = [true, true, true, false, false];
-var answers = ['일요일', '19', '11', '4', '5', '6'];
+var answers = ['일요일', '19', '11', '-1', '-1', '-1'];
 var level = 1;
 var b = [false, false, false, false, false, false];
 var puzzle = [];
@@ -40,8 +40,8 @@ const PUZZLECOORD = [
         [[1853, 5201], [1853, 5621]],
     ]
 ]
-const LEVEL1 = [[0, 1225], [94, 1287]];
-const LEVEL2 = [[79, 1214], [173, 1295]];
+const LEVEL1 = [[0, 993], [153, 1110]];
+const LEVEL2 = [[63, 990], [223, 1104]];
 const LEVEL3 = [[255, 455], [656, 812]];
 const LEVEL4 = [[3065, 4668], [4173, 5780]];
 const LEVEL5 = [[100, 100], [200, 200]];
@@ -130,7 +130,13 @@ function sendInfo() {
     xhr.open('POST', '/back_roomSend', false);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.send(JSON.stringify(data));
-    if(rights == 5) window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1";
+    if(rights == 5) {
+        var xhr = new XMLHttpRequest;
+        xhr.open('POST', '/back_roomSend', false);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        xhr.send(JSON.stringify(data));
+        window.location.href = "/congratulations?pid=" + document.getElementById('pid').value + "&roomId=1";
+    }
 }
 
 function showQuestionModal() {
@@ -381,9 +387,9 @@ function initLevel4() {
     document.getElementById("answer").setAttribute('style', 'display: none;');
     document.getElementById("answerLabel").setAttribute('style', 'display: none;');
     hint = [
-        ["h1"],
-        ["h2"],
-        ["h3"]
+        ["논리게이트 개념을 이용해 보자(XOR 게이트, AND게이트)"],
+        ["AND게이트에는 모두 연결되어야 하고 XOR 게이트는 둘 중 하나만 연결되야 한다."],
+        ["(왼쪽 위부터 오른쪽 아래로)ㅣ ㅣ ㅡ \n ㄴ ↲ \n ㅣ"]
     ]
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';
@@ -402,9 +408,9 @@ function initLevel5() {
     wrongs.push('=5=');
     prevHintRank = -1;
     hint = [
-        ["h1"],
-        ["h2"],
-        ["h3"]
+        ["임의의 폭죽은 최소 몇개의 줄로 연결되야할지 생각해보자."],
+        ["임의의 폭죽은 최소 2개의 줄로 연결되어야 한다."],
+        ["볼록다각형 모양으로 줄을 잇는다."]
     ]
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';

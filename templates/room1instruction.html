@@ -6,15 +6,15 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="bg-blue-50">
-    <div name="header" class="flex">
-        <div class="underline grid grid-cols-2 text-gray-400 text-lg font-light">
-            <div class="justify-start">
+    <div name="header" class="">
+        <div class="flex underline justify-between text-gray-400 text-lg font-light">
+            <div class="">
                 <p>{{name}}</p>
             </div>
-            <div class="justify-center text-center">
+            <div class="text-center">
                 <a href="/">홈으로</a>
             </div>
-            <div class="justify-end text-right">
+            <div class="text-right">
                 <a href="/logout">로그아웃</a>
             </div>
         </div>
@@ -29,8 +29,7 @@
                 <p>1~3단계까지는 문제의 제목을 보고 유추하여, 적절한 곳을 클릭하면 문제와 문제를 입력하는 칸을 볼 수 있습니다.</p>
                 <p>4~5단계는 문제가 먼저 주어지며, 적절하게 답을 냈다면, 상단의 제출 버튼을 누르면 됩니다.</p>
                 <p>힌트는 상단에 있습니다. 힌트는 각 단계마다 최대 3개가 있습니다.</p>
-                <p>1~3단계까지, 세번째(마지막)힌트는 정답을 알려줍니다.</p>
-                <p>4~5단계는, 모르겠습니다.</p>
+                <p>세번째(마지막)힌트는 정답을 알려줍니다.</p>
             </div>
             <p class="text-xl sm:text-5xl font-black mt-3 text-gray-600">설문조사</p>
             <div class="text-lg sm:text-4xl font-medium mt-1 text-gray-500">
