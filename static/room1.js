@@ -4,7 +4,7 @@ var h = [];
 var letter = [];
 var wrongs = [];
 var answerIsText = [true, true, true, false, false];
-var answers = ['일요일', '2', '3', '4', '5', '6'];
+var answers = ['일요일', '19', '11', '4', '5', '6'];
 var level = 1;
 var b = [false, false, false, false, false, false];
 var puzzle = [];
@@ -47,7 +47,7 @@ const LEVEL4 = [[3065, 4668], [4173, 5780]];
 const LEVEL5 = [[100, 100], [200, 200]];
 const LEVEL5_2 = [[300, 300], [400, 400]];
 var fireworks = [];
-const FIREWORKSCOUNT = 5;
+const FIREWORKSCOUNT = 7;
 var graph = [];
 var focusing;
 var focused;
@@ -310,8 +310,8 @@ function initLevel2() {
     prevHintRank = -1;
     hint = [
         ["사칙연산을 이용해보자."],
-        ["뺄셈과 덧셈을 이용해보자힌트"],
-        ["정답: 4시 10분 (410)"]
+        ["뺄셈과 덧셈을 이용해보자."],
+        ["정답: 19"]
     ]
     level = 2;
     var questionContent = document.getElementById('questionModalContent');
@@ -325,7 +325,7 @@ function initLevel2() {
         questionLetterContent.appendChild(tmp);
     }
     problem = ["친구가 다음과 같은 식을 초대장에 첨부해서 홈파티를  몇시에 하는지 알려주었다.", "장난스러운 친구를 가진 당신은, 그런 친구를 가진 당신의 업보라 여기고 문제를 만든 친구의 정성을 봐서라도 다음과 같은 문제를 풀자.",
-    "5+3 = 28", "7 + 4 = 311", "3 + 2 = 15", "5 + 4 = p", "0 + 0 = q", "p시 q분에 열린다."]
+    "5+3 = 28", "7 + 4 = 311", "3 + 2 = 15", "5 + 4 = p", "p시에 열린다.(p만 입력)"]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
@@ -345,9 +345,9 @@ function initLevel3() {
                     + &1 \\times 2^2 \\\\ \
                     + &0 \\times 2^1 \\\\ \
                     + &1 \\times 2^0 \\\\ \
-                    = &11_(10) \
+                    = &13_(10) \
             \\end{align}\\)"],
-        ["정답: 13명"]
+        ["정답: 11명"]
     ]
     level = 3;
     var questionContent = document.getElementById('questionModalContent');
@@ -421,7 +421,7 @@ function initLevel5() {
 }
 function init() {
     var canvas = document.getElementById('mainCanvas');
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight - 33;
     canvas.width = window.innerWidth;
     var modalBg = document.getElementById('questionModal')
     modalBg.width = screen.width;
