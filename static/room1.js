@@ -4,7 +4,7 @@ var h = [];
 var letter = [];
 var wrongs = [];
 var answerIsText = [true, true, true, false, false];
-var answers = ['1', '2', '3', '4', '5', '6'];
+var answers = ['일요일', '2', '3', '4', '5', '6'];
 var level = 1;
 var b = [false, false, false, false, false, false];
 var puzzle = [];
@@ -42,7 +42,7 @@ const PUZZLECOORD = [
 ]
 const LEVEL1 = [[35, 337], [66, 347]];
 const LEVEL2 = [[70, 337], [102, 347]];
-const LEVEL3 = [[0, 0], [656, 871]];
+const LEVEL3 = [[255, 455], [656, 812]];
 const LEVEL4 = [[3065, 4668], [4173, 5780]];
 const LEVEL5 = [[100, 100], [200, 200]];
 const LEVEL5_2 = [[300, 300], [400, 400]];
@@ -189,6 +189,7 @@ function nextLevel() {
 }
 
 function wrong() {
+    var answer = document.getElementById('answer').value;
     alert("Wrong answer!@!");
     wrongs.push(answer);
     sendInfo();
@@ -289,7 +290,7 @@ function initLevel1() {
     }
     questionContent.innerHTML = '';
     problem = ["장난스러운 당신의 친구는 홈파티 초대장에 보낸 시간을 논리 문제로 만들어 첨부하였습니다.", "오늘은 토요일이고, 일주일안에 홈파티가 열린다고 할 때,",
-    "친구의 문제를 풀어 알맞은 요일을 찾아 홈파티에 참여합시다.", "아래 A, B, C, D, E, F 여섯 명의 사람 중 한 사람만 참을 말할 때 홈파티가 열리는 날은 언제일까요?"]
+    "친구의 문제를 풀어 알맞은 요일을 찾아 홈파티에 참여합시다.", "아래 A, B, C, D, E, F 여섯 명의 사람 중 한 사람만 참을 말할 때 홈파티가 열리는 날은 언제일까요?(O요일로 입력)"]
     hint = [
         ["어떤 요일을 가정했을때 참인 명제가 두개가 된다면, 그 가정은 잘못된 것이다."],
         ["대화에서 언급된 요일 중 한 번만 언급된 요일을 찾는다"],
@@ -315,6 +316,14 @@ function initLevel2() {
     level = 2;
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';
+    var questionLetterContent = document.getElementById('questionModalLetterContent');
+    questionLetterContent.innerHTML = '';
+    letter = []
+    for(var i = 0; i < letter.length; i++) {
+        var tmp = document.createElement('p');
+        tmp.textContent = letter[i];
+        questionLetterContent.appendChild(tmp);
+    }
     problem = ["친구가 다음과 같은 식을 초대장에 첨부해서 홈파티를  몇시에 하는지 알려주었다.", "장난스러운 친구를 가진 당신은, 그런 친구를 가진 당신의 업보라 여기고 문제를 만든 친구의 정성을 봐서라도 다음과 같은 문제를 풀자.",
     "5+3 = 28", "7 + 4 = 311", "3 + 2 = 15", "5 + 4 = p", "0 + 0 = q", "p시 q분에 열린다."]
     for(var i = 0; i < problem.length; i++) {
@@ -343,6 +352,14 @@ function initLevel3() {
     level = 3;
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';
+    var questionLetterContent = document.getElementById('questionModalLetterContent');
+    questionLetterContent.innerHTML = '';
+    letter = []
+    for(var i = 0; i < letter.length; i++) {
+        var tmp = document.createElement('p');
+        tmp.textContent = letter[i];
+        questionLetterContent.appendChild(tmp);
+    }
     problem = ["장난스러운 친구가 날린 초대장을 푸느라 고생한 당신! ", "당신은 친구의 어려운 초대장 때문에 고생하고 있는 다른 피해자가 얼마나 있을지 알아볼 필요가 있다.",
     "사죄의 의미로 소소한 사탕을 돌리기로 결심한 '착한' 당신은 이 파티에 총 몇명이 올지를 알아보자.", "정말 다행히도 친구는 파티 참여 인원를 이진법으로 초대장에 첨부하였다.",
     "1011(2)"]
