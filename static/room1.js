@@ -1,6 +1,7 @@
 var rights = 0, easterEggs = 0;
 var hints = [];
 var h = [];
+var letter = [];
 var wrongs = [];
 var answerIsText = [true, true, true, false, false];
 var answers = ['1', '2', '3', '4', '5', '6'];
@@ -225,8 +226,8 @@ function submitAnswer() {
     else {
         if(level == 4) {
             if((puzzle[0]%2) && (puzzle[1]%2) && !(puzzle[2]%2) && (puzzle[3]==1) && !puzzle[4] && (puzzle[5]%2)) {
-                //level4Finished();
-                nextLevel();
+                level4Finished();
+                // nextLevel();
             }
             else {
                 answer = "";
@@ -276,12 +277,21 @@ function initLevel1() {
     prevHintRank = -1;
     level = 1;
     var questionContent = document.getElementById('questionModalContent');
+    var questionLetterContent = document.getElementById('questionModalLetterContent');
+    questionLetterContent.innerHTML = '';
+    letter = ["A. 모레는 홈파티가 열리는 날이야.", "B. 아니, 홈파티가 열리는 날은 수요일이야.", "C. 너희 다 틀렸어. 홈파티가 열리는 날은 3일 후야.",
+    "D. 웃기는 군. 홈파티가 열리는 날은 목요일과 일요일 중에 있어.", "E. 난 홈파티가 어제와 같은 요일에 열린다는 걸 확신해.",
+    "F. 내가 아는건 홈파티가 내일과 같은 요일에 열리지 않는다는 것 뿐이야."];
+    for(var i = 0; i < letter.length; i++) {
+        var tmp = document.createElement('p');
+        tmp.textContent = letter[i];
+        questionLetterContent.appendChild(tmp);
+    }
     questionContent.innerHTML = '';
-    problem = ["장난스러운 당신의 친구는 홈파티 초대장에 보낸 시간을 논리문제로 만들어 첨부하였다.", "당신은 친구에게 문제적 남자 시청을 추천했던 과거의 당신을 원망해보지만 이미 늦은 일이다.",
-    "과거는 저기너머에 두고 당신의 절친한 친구를 위해 문제를 풀어 홈파티에 참여하자.", "a. 홈파티는 수요일에 시작한다.", "b. 홈파티는 목요일에 시작한다.", "c. 홈파티는 금요일에 시작한다.", 
-    "d. 홈파티는 토요일에 시작한다.", "e. 홈파티는 일요일에 시작한다."]
+    problem = ["장난스러운 당신의 친구는 홈파티 초대장에 보낸 시간을 논리 문제로 만들어 첨부하였습니다.", "오늘은 토요일이고, 일주일안에 홈파티가 열린다고 할 때,",
+    "친구의 문제를 풀어 알맞은 요일을 찾아 홈파티에 참여합시다.", "아래 A, B, C, D, E, F 여섯 명의 사람 중 한 사람만 참을 말할 때 홈파티가 열리는 날은 언제일까요?"]
     hint = [
-        ["참인 명제가 두 개인 경우, 거짓이 된다. "],
+        ["어떤 요일을 가정했을때 참인 명제가 두개가 된다면, 그 가정은 잘못된 것이다."],
         ["대화에서 언급된 요일 중 한 번만 언급된 요일을 찾는다"],
         ["정답 : 일요일"]
     ]

@@ -4,7 +4,14 @@
     <title>회원 가입</title>
     <script text="text/javascript">
         function f() {
-            if(document.getElementById('sid1').value != document.getElementById('sid2').value) return false;
+            if(document.getElementById('sid1').value != document.getElementById('sid2').value) {
+                alert("학번을 확인해주십시오!");
+                return false;
+            }
+            if(document.getElementById('sid1').value == '' || document.getElementById('sid1').value == null) {
+                alert("학번을 입력하십시오!");
+                return false;
+            }
             return true;
         }
     </script>

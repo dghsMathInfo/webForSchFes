@@ -256,11 +256,7 @@
                         drawLine(ctx, tmp2[0], tmp2[1], tmp3[0], tmp3[1], LINEWIDTH);
                     }
                 }
-                if(isInRectangle(tmp[0], tmp[1], LEVEL4[0][0], LEVEL4[0][1], Math.abs(LEVEL4[0][0] - LEVEL4[1][0]), Math.abs(LEVEL4[0][1] - LEVEL4[1][1]))) submitAnswer();
-                ctx.fillStyle = "green";
-                var tmp1 = imgCoordToRawCoord(LEVEL4[0][0], LEVEL4[0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                var tmp2 = imgCoordToRawCoord(LEVEL4[1][0], LEVEL4[1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                ctx.fillRect(tmp1[0], tmp1[1], Math.abs(tmp1[0] - tmp2[0]), Math.abs(tmp1[1] - tmp2[1]));
+
             })
             document.getElementById('submitBtn').setAttribute('style', 'display: block;');
             initLevel4();
@@ -380,7 +376,9 @@
                             <h3 class="text-5xl leading-6 font-medium text-gray-900" id="questionModalTitle">
                                 Problem 1
                             </h3>
-                            <div class="mt-2 text-2xl text-gray-500" id="questionModalContent">
+                            <div class="mt-2 text-lg sm:text-2xl text-black" id="questionModalContent">
+                            </div>
+                            <div class="mt-2 italic text-2xl text-black" id="questionModalLetterContent">
                             </div>
                         </div>
                     </div>

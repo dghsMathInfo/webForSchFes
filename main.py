@@ -57,6 +57,14 @@ def back_login():
     else:
         return redirect(url_for('login', re=2))
 
+@app.route('/room1instruction')
+def room1instruction():
+    return render_template('room1instruction.html')
+
+@app.route('/room1answer')
+def room1answer():
+    return render_template('room1answer.html')
+
 @app.route('/logout')
 def logout():
     del session['name']

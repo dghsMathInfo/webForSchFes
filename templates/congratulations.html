@@ -36,13 +36,24 @@
                     <input type="hidden" id="pid" name="pid" value="{{pid}}">
                     <input type="hidden" id="roomId" name="roomId" value="{{roomId}}">
                     <p>추천하고 싶은 정도</p>
-                    <input type="number" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="rateOfRecommendation" name="rateOfRecommendation" value="">
+                    <div class="flex">
+                        <input type="radio" value="1" id="choice1" name="rateOfRecommendation">
+                        <label class="mr-2" for="choice1">⭐</label>
+                        <input type="radio" value="2" id="choice2" name="rateOfRecommendation">
+                        <label class="mr-2" for="choice1">⭐⭐</label>
+                        <input type="radio" value="3" id="choice3" name="rateOfRecommendation" checked="checked">
+                        <label class="mr-2" for="choice1">⭐⭐⭐</label>
+                        <input type="radio" value="4" id="choice4" name="rateOfRecommendation">
+                        <label class="mr-2" for="choice1">⭐⭐⭐⭐</label>
+                        <input type="radio" value="5" id="choice5" name="rateOfRecommendation">
+                        <label for="choice1">⭐⭐⭐⭐⭐</label>
+                    </div>
                     <p class="pt-3">플레이 한 이유</p>
                     <select id="select" class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="recommended" name="recommended"><!--onchange="forEtc();">--> 
                         <option value="0">그냥 하고 싶어서</option>
                         <option value="1">친구의 추천으로</option>
                         <option value="2">선/후배의 추천으로</option>
-                        <option value="-1" id="etc">기타</option>
+                        <!--<option value="-1" id="etc">기타</option>-->
                     </select>
                     <!--<input class="rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-thin" id="etc" style="display: none;">-->
                     <div class="flex mt-3 justify-center pt-3"><input type="submit" value="확인" class="rounded-lg bg-blue-500 hover:bg-blue-700 text-white text-black py-1 px-4"></div>
