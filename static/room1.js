@@ -367,9 +367,8 @@ function initLevel3() {
         tmp.textContent = letter[i];
         questionLetterContent.appendChild(tmp);
     }
-    problem = ["장난스러운 친구가 날린 초대장을 푸느라 고생한 당신! ", "당신은 친구의 어려운 초대장 때문에 고생하고 있는 다른 피해자가 얼마나 있을지 알아볼 필요가 있다.",
-    "사죄의 의미로 소소한 사탕을 돌리기로 결심한 '착한' 당신은 이 파티에 총 몇명이 올지를 알아보자.", "정말 다행히도 친구는 파티 참여 인원를 이진법으로 초대장에 첨부하였다.",
-    "1011(2)"]
+    problem = ["당신은 친구가 보낸 초대장을 무사히 풀고, 홈파티 장소에 갈 준비를 하였습니다. ", "홈파티에서 먹을 아이스크림을 사가기로 한 당신은 파티 참여 인원을 확인합니다.",
+    "초대장에 이진법으로 쓰여있는 초대인원을 알아내 알맞은 개수의 아이스크림을 준비해봅시다.", "\\(1011_{(2)}\\)"]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
