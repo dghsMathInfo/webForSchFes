@@ -4,6 +4,12 @@
     <title>방1 해설</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.onload = function() {
+            var tmp = window.innerWidth;
+            document.getElementById('img').setAttribute('width', tmp);
+        }
+    </script>
 </head>
 <body class="bg-blue-50">
     <div name="header" class="">
@@ -25,11 +31,18 @@
     <div name="body">
         <p class="text-xl sm:text-5xl font-black mt-3 text-gray-600">1번</p>
         <div class="text-lg sm:text-4xl font-medium mt-1 text-gray-500">
+            <p>D와 F는 동일하게 일요일에 대하여 각각 열린다와 열리지 않는다라고 주장하고 있습니다.</p>
+            <p>만약 한 쪽이 참이라면 다른 한 쪽은 거짓이 됩니다.</p>
+            <p>(1) D가 참이고 F가 거짓인 경우 파티는 일요일에 개최되어야 합니다.</p>
+            <p>(2) D가 거짓이고 F가 참인 경우 파티는 목요일과 일요일에 개최되지 않습니다.</p>
+            <p>그리고 A, B, C, E는 모두 거짓이니 파티는 각각 월, 수, 화, 금에 열리지 않습니다.</p>
+            <p>즉, 이는 파티가 일주일 안에 열린다는 조건에 위배됩니다.</p>
+            <p>따라서 (1)의 경우가 성립하므로 파티는 일요일에 개최되어야 합니다.</p>
         </div>
         <p class="text-xl sm:text-5xl font-black mt-3 text-gray-600">2번</p>
         <div class="text-lg sm:text-4xl font-medium mt-1 text-gray-500">
-            <p>폭죽을 볼록다각형 모양으로 이으면(줄 7개를 사용하여), 줄이 끊어지지 않을경우 모두가 이어집니다.</p>
-            <p>이때 아직 직접 연결하지 않은 두 폭죽을 이으면 문제의 조건을 만족합니다.</p>
+            <p>\(A \circ B = (A-B)\times 10 + (A+B) = \overline{XY}(X = A-B, Y = A+B)\)</p>
+            <p>이므로, \(5\circ 4 = (5-4)\times 10 + (5+4) = 19\)이다.</p>
         </div>
         <p class="text-xl sm:text-5xl font-black mt-3 text-gray-600">3번</p>
         <div class="text-lg sm:text-4xl font-medium mt-1 text-gray-500">
@@ -39,8 +52,13 @@
         </div>
         <p class="text-xl sm:text-5xl font-black mt-3 text-gray-600">4번</p>
         <div class="text-lg sm:text-4xl font-medium mt-1 text-gray-500">
-            <p>폭죽을 볼록다각형 모양으로 이으면(줄 7개를 사용하여), 줄이 끊어지지 않을경우 모두가 이어집니다.</p>
-            <p>이때 아직 직접 연결하지 않은 두 폭죽을 이으면 문제의 조건을 만족합니다.</p>
+            <img src="https://blog.kakaocdn.net/dn/pnvID/btqv7gMbwQd/rkuppjoXM29hHRn4yDYMX0/img.jpg" width="" id="img">
+            <p>and 논리 게이트에는 두 전력이 공급 되어야 하고, xor 논리 게이트에는 한 전력만 공급되어야 작동을 합니다.</p>
+            <p>맨 위 왼쪽 논리 게이트는 and 논리 게이트 이므로 둘다 연결되어 있어야 합니다.</p>
+            <p>오른쪽 논리 게이트는 xor 논리 게이트 이므로 둘중 하나만 연결되어 있어야 하는데,</p>
+            <p>왼쪽 논리게이트가 성립 하려면 왼쪽을 흐르게 하고 오른쪽을 흐르지 못하게 해야 합니다.</p>
+            <p>그 밑에는 and 게이트이므로 둘다 흐르게 해야 합니다.</p>
+            <p>맨 밑 논리게이트는 xor게이트 인데, 위에 and 게이트에서 흐르고 있기 때문에 오른쪽에서 전류가 흐르지 못하게 막아야 합니다.</p>
         </div>
         <p class="text-xl sm:text-5xl font-black mt-3 text-gray-600">5번</p>
         <div class="text-lg sm:text-4xl font-medium mt-1 text-gray-500">
