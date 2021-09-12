@@ -282,8 +282,8 @@
                     var imgWidth = CH*(REALWIDTH/REALHEIGHT), imgHeight = CH;
                     ctx.drawImage(img, (CW - imgWidth)/2, 0, imgWidth, imgHeight);
                 }
+                setTimeout(nextLevel(), 5000);
             }
-            setTimeout(nextLevel(), 3000);
         }
 
         function initLevel5_cli() {

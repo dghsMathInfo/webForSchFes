@@ -258,7 +258,7 @@ function submitAnswer() {
                 if(!flag) break;
             }
             if(flag) {
-                rights++;
+                rights = 5;
                 end();
             }
             else {
