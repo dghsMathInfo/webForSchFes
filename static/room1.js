@@ -279,7 +279,7 @@ function initLevel1() {
     var questionContent = document.getElementById('questionModalContent');
     var questionLetterContent = document.getElementById('questionModalLetterContent');
     questionLetterContent.innerHTML = '';
-    letter = ["A. 모레는 홈파티가 열리는 날이야.", "B. 아니, 홈파티가 열리는 날은 수요일이야.", "C. 너희 다 틀렸어. 홈파티가 열리는 날은 3일 후야.",
+    letter = ["아래 A, B, C, D, E, F 여섯 명의 사람 중 한 사람만 참을 말하고 있어.", "A. 모레는 홈파티가 열리는 날이야.", "B. 아니, 홈파티가 열리는 날은 수요일이야.", "C. 너희 다 틀렸어. 홈파티가 열리는 날은 3일 후야.",
     "D. 웃기는 군. 홈파티가 열리는 날은 목요일과 일요일 중에 있어.", "E. 난 홈파티가 어제와 같은 요일에 열린다는 걸 확신해.",
     "F. 내가 아는건 홈파티가 내일과 같은 요일에 열리지 않는다는 것 뿐이야."];
     for(var i = 0; i < letter.length; i++) {
@@ -289,9 +289,9 @@ function initLevel1() {
     }
     questionContent.innerHTML = '';
     problem = ["장난스러운 당신의 친구는 홈파티 초대장에 보낸 시간을 논리 문제로 만들어 첨부하였습니다.", "오늘은 토요일이고, 일주일안에 홈파티가 열린다고 할 때,",
-    "친구의 문제를 풀어 알맞은 요일을 찾아 홈파티에 참여합시다.", "아래 A, B, C, D, E, F 여섯 명의 사람 중 한 사람만 참을 말할 때 홈파티가 열리는 날은 언제일까요?(O요일로 입력)"]
+    "홈파티는 무슨 요일에 열릴까요?(O요일로 입력)"]
     hint = [
-        ["어떤 요일을 가정했을때 참인 명제가 두개가 된다면, 그 가정은 잘못된 것이다."],
+        ["어떤 요일이 답이라고 가정했을때 참인 명제가 두개가 된다면, 그 가정은 잘못된 것이다."],
         ["대화에서 언급된 요일 중 한 번만 언급된 요일을 찾는다"],
         ["정답 : 일요일"]
     ]
@@ -308,7 +308,7 @@ function initLevel2() {
     wrongs.push('=2=');
     prevHintRank = -1;
     hint = [
-        ["사칙연산을 이용해보자."],
+        ["사칙연산 중에 2개를 결합한 연산이다."],
         ["뺄셈과 덧셈을 이용해보자."],
         ["정답: 19"]
     ]
@@ -317,8 +317,8 @@ function initLevel2() {
     questionContent.innerHTML = '';
     var questionLetterContent = document.getElementById('questionModalLetterContent');
     questionLetterContent.innerHTML = '';
-    letter = ["아까 문제는 어려웠지?", "이번엔 조금 나을거야.", "포기하지 말고 홈파티에 꼭 와줘!", "\\(5+3=28\\)", 
-    "\\(7+4=311\\)", "\\(3+2=15\\)", "\\(5+4=p\\)"]
+    letter = ["아까 문제는 어려웠지?", "이번엔 조금 나을거야.", "포기하지 말고 홈파티에 꼭 와줘!", "\\(5\\circ 3=28\\)", 
+    "\\(7\\circ 4=311\\)", "\\(3\\circ 2=15\\)", "\\(5\\circ 4=p\\)"]
     for(var i = 0; i < letter.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = letter[i];
@@ -342,11 +342,11 @@ function initLevel3() {
     hint = [
         ["2진법의 각 자리수는 \\(2^0\\), \\(2^1\\), \\(2^2\\), \\(2^3\\)이다. (1001(2진법) -> 9(10진법))"],
         ["\\(\\begin{align} \
-            1101_(2) = &1 \\times 2^3 \\\\ \
-                    + &1 \\times 2^2 \\\\ \
+            1001_{(2)} = &1 \\times 2^3 \\\\ \
+                    + &0 \\times 2^2 \\\\ \
                     + &0 \\times 2^1 \\\\ \
                     + &1 \\times 2^0 \\\\ \
-                    = &13_(10) \
+                    = &9_{(10)} \
             \\end{align}\\)"],
         ["정답: 11명"]
     ]
@@ -429,5 +429,4 @@ function init() {
     var modalBg = document.getElementById('hintModal')
     modalBg.width = screen.width;
     modalBg.height = screen.height;
-    var modal = document.getElementById('questionContent')
 }

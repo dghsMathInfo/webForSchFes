@@ -59,11 +59,11 @@ def back_login():
 
 @app.route('/room1instruction')
 def room1instruction():
-    return render_template('room1instruction.html')
+    return render_template('room1instruction.html', name=session['name'])
 
 @app.route('/room1answer')
 def room1answer():
-    return render_template('room1answer.html')
+    return render_template('room1answer.html', name=session['name'])
 
 @app.route('/logout')
 def logout():
