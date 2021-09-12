@@ -13,7 +13,7 @@
             hintClick(0);
         }
         function initLevel1_cli() {
-            const REALWIDTH = 501, REALHEIGHT = 595;
+            const REALWIDTH = 959, REALHEIGHT = 1484;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
@@ -23,7 +23,7 @@
             ctx.fillStyle = BGCOLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
-            img.src = "{{url_for('static', filename='invitation.png')}}";
+            img.src = "{{url_for('static', filename='invitation.jpg')}}";
             img.onload = function () {
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
@@ -49,7 +49,7 @@
             initLevel1();
         }
         function initLevel2_cli() {
-            const REALWIDTH = 501, REALHEIGHT = 595;
+            const REALWIDTH = 971, REALHEIGHT = 1486;
             var canvas = document.getElementById('mainCanvas');
             var canvasLeft = canvas.offsetLeft + canvas.clientLeft;
             var canvasTop = canvas.offsetTop + canvas.clientTop;
@@ -59,7 +59,7 @@
             ctx.fillStyle = BGCOLOR;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
-            img.src = "{{url_for('static', filename='invitation.png')}}";
+            img.src = "{{url_for('static', filename='invitation2.jpg')}}";
             img.onload = function () {
                 if(canvas.getBoundingClientRect().width*REALHEIGHT < canvas.getBoundingClientRect().height*REALWIDTH) {
                     var imgWidth = canvas.getBoundingClientRect().width, imgHeight = canvas.getBoundingClientRect().width*(REALHEIGHT/REALWIDTH);
@@ -92,6 +92,8 @@
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
+            ctx.fillStyle = BGCOLOR;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             var img = new Image();
             img.src = "{{url_for('static', filename='howmany.png')}}";
             img.onload = function () {
@@ -137,6 +139,8 @@
                 ctx.fillStyle = "blue";
                 ctx.fillRect(100, 100, 100, 100);
                 ctx.fillRect(400, 400, 100, 100);*/
+                ctx.fillStyle = BGCOLOR;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
                 var img = new Image();
                 img.src = "{{url_for('static', filename='howmany.png')}}";
                 img.onload = function () {
@@ -205,10 +209,6 @@
                         drawLine(ctx, Math.min(tmp2[0], tmp3[0]), Math.min(tmp2[1], tmp3[1]), Math.max(tmp2[0], tmp3[0]), Math.max(tmp2[1], tmp3[1]), LINEWIDTH);
                     }
                 }
-                ctx.fillStyle = "green";
-                var tmp1 = imgCoordToRawCoord(LEVEL4[0][0], LEVEL4[0][1], CW, CH, REALWIDTH, REALHEIGHT);
-                var tmp2 = imgCoordToRawCoord(LEVEL4[1][0], LEVEL4[1][1], CW, CH, REALWIDTH, REALHEIGHT);
-                ctx.fillRect(tmp1[0], tmp1[1], Math.abs(tmp1[0] - tmp2[0]), Math.abs(tmp1[1] - tmp2[1]));
             }
             showQuestionModal();
             canvas.addEventListener('click', function (event) {

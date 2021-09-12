@@ -136,11 +136,10 @@ def getScore(startTime:int, finishedTime:int, h:str, wrongs:str, right:int):
     BETA = 2
     GAMMA = 1
     DELTA = 4
-    EPSILON = 17
     score = ALPHA
     for i in range(len(h)):
-        score -= BETA**int(h[i])*(i%3 + 1)
-    score -= GAMMA*deltaT + DELTA*wrongs - EPSILON*right
+        score -= BETA**(int(h[i])*(i%3 + 1))
+    score -= GAMMA*deltaT + DELTA*wrongs
     return score
     
 
