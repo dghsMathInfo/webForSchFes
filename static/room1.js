@@ -42,7 +42,7 @@ const PUZZLECOORD = [
 ]
 const LEVEL1 = [[0, 993], [153, 1110]];
 const LEVEL2 = [[63, 990], [223, 1104]];
-const LEVEL3 = [[255, 455], [656, 812]];
+const LEVEL3 = [[245, 430], [666, 840]];
 const LEVEL4 = [[3065, 4668], [4173, 5780]];
 const LEVEL5 = [[100, 100], [200, 200]];
 const LEVEL5_2 = [[300, 300], [400, 400]];
