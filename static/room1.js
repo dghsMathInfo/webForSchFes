@@ -331,6 +331,7 @@ function initLevel2() {
         tmp.textContent = problem[i];
         questionContent.appendChild(tmp);
     }
+    MathJax.typeset();
     var questionTitle = document.getElementById('questionModalTitle');
     questionTitle.textContent = "문제 2";
     document.getElementById('questionTitle').textContent = "파티 시작 시간을 찾아라!";
