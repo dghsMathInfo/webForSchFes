@@ -26,7 +26,7 @@ def signupSid():
 def back_signupName():
     name = request.form['name']
     tmp = Data.UserDb()
-    if tmp.isUerExist(name): return redirect(url_for('signupName', failed='True'))
+    if tmp.isUserExist(name): return redirect(url_for('signupName', failed='True'))
     else: return redirect(url_for('signupSid', prev = name))
 
 @app.route('/back_signupSid', methods=['POST'])
