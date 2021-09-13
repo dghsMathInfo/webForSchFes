@@ -166,7 +166,7 @@ def getScore(startTime:int, finishedTime:int, h:str, wrongs:str, right:int):
     wrongs = len(wrongs.split(',')) - (5 if right == 5 else (right + 1))
     ALPHA = 500
     BETA = 2
-    GAMMA = 1
+    GAMMA = 3
     DELTA = 4
     score = ALPHA
     for i in range(len(h)):
