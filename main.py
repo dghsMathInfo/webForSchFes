@@ -1,30 +1,47 @@
-from os import name
+import os
 from flask import Flask, request, render_template, redirect, url_for, session
 import Data
 import time
 import datetime
-
+import logging
+import logging.handlers
 app = Flask(__name__)
 app.secret_key = b'_5#y9L"F4M0z\n\xec]/'
-
+logging.basicConfig(filename = "logs/project.log", level = logging.DEBUG)
+myLogger = logging.getLogger('myLogger') # 로거 이름: myLogger
+myLogger.setLevel(logging.DEBUG) # 로깅 수준: DEBUG
+myLogger.propagate = 0
+file_handler = logging.handlers.TimedRotatingFileHandler(
+  filename='logs/project.log', when='midnight', interval=1,  encoding='utf-8'
+  ) # 자정마다 한 번씩 로테이션
+file_handler.suffix = 'log-%Y%m%d' # 로그 파일명 날짜 기록 부분 포맷 지정 
+myLogger.addHandler(file_handler) # 로거에 핸들러 추가
+formatter = logging.Formatter(
+  '%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] %(message)s'
+  )
+file_handler.setFormatter(formatter) # 핸들러에 로깅 포맷 할당
 @app.route('/signin')
 def signin():
+    myLogger.debug("signin executed")
     return render_template('singin.html')
 
 @app.route('/signupName', methods=['GET'])
 def signupName():
+    myLogger.debug("signupName executed")
     failed = request.args.get('failed')
     if failed == None: failed = 'False'
     return render_template('signupName.html', failed=failed)
 
 @app.route('/signupSid')
 def signupSid():
+    myLogger.debug("signupSid executed")
     prev = request.args.get('prev')
     return render_template('signupSid.html', prev = prev)
 
 @app.route('/back_signupName', methods=['POST'])
 def back_signupName():
     name = request.form['name']
+    myLogger.debug(name + " back_signupName executed ")
     tmp = Data.UserDb()
     if tmp.isUserExist(name): return redirect(url_for('signupName', failed='True'))
     else: return redirect(url_for('signupSid', prev = name))
@@ -33,12 +50,14 @@ def back_signupName():
 def back_signupSid():
     name = request.form['name']
     studentId = request.form['studentId']
+    myLogger.debug(name + " " + studentId + " back_signupSid executed ")
     userDb = Data.UserDb()
     userDb.uploadUser(name, int(studentId))
     return redirect(url_for('login',re=0))
 
 @app.route('/login', methods=["GET"])
 def login():
+    myLogger.debug(f'login executed')
     re = request.args.get('re')
     if re == None: re = 0
     return render_template('login.html',re=re)
@@ -49,6 +68,7 @@ def back_login():
     studentId = int(request.form['studentId'])
     print(name, studentId)
     userDb = Data.UserDb()
+    myLogger.debug(f'{name} {studentId}  back_login executed')
     if not userDb.isUserExist(name): return redirect(url_for('login', re=1))
     tmp = userDb.getStudentId(name)
     if tmp == studentId:
@@ -59,20 +79,30 @@ def back_login():
 
 @app.route('/room1instruction')
 def room1instruction():
+    myLogger.debug(f'{session["name"]}  room1instruction executed')
     return render_template('room1instruction.html', name=session['name'])
 
 @app.route('/room1answer')
 def room1answer():
+    userDb = Data.UserDb()
+    name = session['name']
+    myLogger.debug(f'{session["name"]}  room1answer executed')
+    if not userDb.isUserExist(name): return redirect(url_for('login', re=0))
+    roomDb = Data.Room(1)
+    if not (5 in roomDb.getRightsByName(name) or '5' in roomDb.getRightsByName(name)):
+        return redirect(url_for('home'))
     return render_template('room1answer.html', name=session['name'])
 
 @app.route('/logout')
 def logout():
+    myLogger.debug(f'{session["name"]}  logout executed')
     del session['name']
     return redirect(url_for('home'))
 
 @app.route('/')
 def home():
     if not 'name' in session: return redirect(url_for('login', re = 0))
+    myLogger.debug(f'{session["name"]}  home executed')
     return render_template('home.html', name = session['name'])
 
 @app.route('/room/<roomId>')
@@ -83,6 +113,7 @@ def room(roomId):
 
     roomDb = Data.Room(roomId)
     pid = roomDb.getNextPid()
+    myLogger.debug(f'{session["name"]}({pid}) room(1) executed')
     #session['roomId'] = roomId
     #session['pid'] = pid
     roomDb.uploadPlay(session['name'], int(time.time()))
@@ -91,7 +122,7 @@ def room(roomId):
 @app.route('/back_roomSend', methods=['POST'])
 def back_roomSend():
     params = request.get_json()
-    print(params)
+    myLogger.debug(f'{session["name"]} {params} back_roomSend executed')
     roomId = params['roomId']
     pid = params['pid']
     finishedTime = int(float(params['finishedTime'])/1000)
@@ -107,6 +138,7 @@ def back_roomSend():
 
 @app.route('/leaderboard', methods=['GET'])
 def leaderboard():
+    myLogger.debug(f'{session["name"]}  leaderboard executed')
     roomDb = Data.Room(int(request.args.get('roomId')))
     #tmp = roomDb.getNSFRForAll()
     tmp = roomDb.getNSFRWHForAll()
@@ -145,11 +177,13 @@ def getScore(startTime:int, finishedTime:int, h:str, wrongs:str, right:int):
 
 @app.route('/survey')
 def survey():
+    myLogger.debug(f'{session["name"]}  survey executed')
     roomId = int(request.args.get('roomId'))
     return render_template('survey.html', roomId=roomId)
 
 @app.route('/back_survey', methods=['POST'])
 def back_survey():
+    myLogger.debug(f'{session["name"]}  back_survey executed')
     mbti = request.form['mbti']
     recentMathPCnt = request.form['recentMathPCnt']
     rateOfLikingMath = request.form['rateOfLikingMath']
@@ -164,6 +198,7 @@ def back_survey():
 def congratulations():
     roomId = request.args.get('roomId')
     pid = request.args.get('pid')
+    myLogger.debug(f'{session["name"]}({pid}) congratulations executed')
     return render_template('congratulations.html', roomId=roomId, pid=pid)
 
 @app.route('/back_congratulations', methods=['POST'])
@@ -172,9 +207,11 @@ def back_congratulations():
     pid = request.form['pid']
     rateOfRecommendation = request.form['rateOfRecommendation']
     recommended = request.form['recommended']
+    myLogger.debug(f'{session["name"]}({pid}) {rateOfRecommendation} {recommended} back_congratulations executed')
     roomDb = Data.Room(roomId)
     roomDb.updateRec(pid, rateOfRecommendation, recommended)
     return redirect(url_for('leaderboard', roomId = roomId))
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=80, debug=True)
+    app.run('0.0.0.0', port=80, debug=False)
+    myLogger.debug("server start!")

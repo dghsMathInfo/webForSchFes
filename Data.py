@@ -100,6 +100,12 @@ class Room:
         query = f'UPDATE Room_{self.roomId} SET rateOfRecommendation = {rateOfRecommendation}, recommended = {recommended} WHERE pid = {pid}'
         self.c.execute(query)
         self.conn.commit()
+    
+    def getRightsByName(self, name:str) -> int:
+        query = f'SELECT rights FROM Room_{self.roomId} WHERE name = "{name}"'
+        self.c.execute(query)
+        self.conn.commit()
+        return self.c.fetchall()
 
     def getNextPid(self) -> int:
         query = f'SELECT seq FROM sqlite_sequence WHERE name = "Room_{self.roomId}"'
