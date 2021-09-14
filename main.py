@@ -84,13 +84,15 @@ def room1instruction():
 
 @app.route('/room1answer')
 def room1answer():
+    myLogger.debug(f'{session["name"]}  room1answer executed')
+    """
     userDb = Data.UserDb()
     name = session['name']
-    myLogger.debug(f'{session["name"]}  room1answer executed')
     if not userDb.isUserExist(name): return redirect(url_for('login', re=0))
     roomDb = Data.Room(1)
-    if not (5 in roomDb.getRightsByName(name) or '5' in roomDb.getRightsByName(name)):
+    if not ((5 in roomDb.getRightsByName(name)) or ('5' in roomDb.getRightsByName(name))):
         return redirect(url_for('home'))
+    """
     return render_template('room1answer.html', name=session['name'])
 
 @app.route('/logout')
