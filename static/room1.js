@@ -66,7 +66,7 @@ function hintClick(next) {
         hintContent.innerHTML = '';
         if(prevHintRank == -1) {
             var tmp = document.createElement('p');
-            tmp.textContent = "힌트 볼래?";
+            tmp.textContent = "힌트를 확인 하시겠습니까?";
         }
         else {
             for(var i = 0; i < hint[prevHintRank].length; i++) {
