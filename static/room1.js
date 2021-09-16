@@ -323,15 +323,15 @@ function initLevel2() {
     questionContent.innerHTML = '';
     var questionLetterContent = document.getElementById('questionModalLetterContent');
     questionLetterContent.innerHTML = '';
-    letter = ["아까 문제는 어려웠지?", "이번엔 조금 나을거야.", "포기하지 말고 홈파티에 꼭 와줘!", "\\(5\\circ 3=28\\)", 
-    "\\(7\\circ 4=311\\)", "\\(3\\circ 2=15\\)", "\\(5\\circ 4=p\\)"]
+    letter = ["홈파티 요일을 잘 맞췄구나.", "\\(5\\circ 3=28\\)", 
+    "\\(7\\circ 4=311\\)", "\\(3\\circ 2=15\\)", "\\(5\\circ 4=p\\)", "친구야, p시간에 맞춰 꼭 와줘"]
     for(var i = 0; i < letter.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = letter[i];
         questionLetterContent.appendChild(tmp);
     }
-    problem = ["친구는 짧은 메세지와 함께 또 다른 문제를 첨부하였습니다. ", "아래 식을 보고 친구의 문제를 풀어 홈파티에 참여합시다.",
-    "홈파티는 \\(p\\)시에 열린다고 합니다. 몇시에 열릴까요?(\\(p\\)만 입력)"]
+    problem = ["이제는 파티 시간을 알아내 볼까요?", "당신의 친구는 홈파티 시간을 쪽지에 이렇게 적어 두었습니다.",
+    "쪽지의 식을 보고 문제를 풀어 홈파티에 늦지 않게 참여합시다.(답란에는 \\(p\\)만 입력)"]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
@@ -414,8 +414,8 @@ function initLevel5() {
     ]
     var questionContent = document.getElementById('questionModalContent');
     questionContent.innerHTML = '';
-    problem = ["당신은 파티를 신나게 마무리하기 위해 폭죽을 한번에 터트리려고 합니다.", "혹시라도 줄 하나가 끊어져도 폭죽이 모두 터지도록 폭죽을 연결해봅시다.",
-    "폭죽 하나를 클릭한 뒤 다른 것을 클릭해서 이을 수 있습니다.", "최대 " +(FIREWORKSCOUNT +1) + "개의 줄을 사용할 수 있습니다."]
+    problem = ["코로나 극복 후 처음으로 열린 신나는 파티, 여러분은 어떠셨나요? ", "이제 파티의 마지막 순서로 모두 함께 폭죽을 터트려 볼까요?",
+    "화면에 보이는 폭죽을 줄로 연결하여 모든 폭죽이 줄이 하나가 끊어지더라도 한번에 터지도록 연결해봅시다.", "폭죽 하나를 클릭한 뒤 다른 것을 클릭해서 이을 수 있고, 최대 " +(FIREWORKSCOUNT +1) + "개의 줄을 사용할 수 있습니다."]
     for(var i = 0; i < problem.length; i++) {
         var tmp = document.createElement('p');
         tmp.textContent = problem[i];
