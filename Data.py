@@ -23,7 +23,7 @@ class UserDb:
     def deleteAll(self) -> None:
         query = 'DROP TABLE User'
         self.c.execute()
-        self.conn.commit
+        self.conn.commit()
     
     def uploadUser(self, name:str, studentId:int, mbti:str='-', recentMathPCnt:int=-1, rateOfLikingMath:int=-1, mostLikeMathField:str='-', survyed:int=0) -> None:
         query = f'INSERT INTO User (name, studentId, mbti, recentMathPCnt, rateOfLikingMath, mostLikeMathField, survyed) VALUES ("{name}", {studentId}, "{mbti}", {recentMathPCnt}, {rateOfLikingMath}, "{mostLikeMathField}", {survyed})'
